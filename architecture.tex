@@ -10,15 +10,15 @@
 
 \section{Explication détaillée des packages}
 
-Notre architecture est structuré en plusieurs grands groupes se composant de classes. Nous allons décrire ces groupes un à un.
+Notre architecture est structuré en plusieurs packages. Ils ont été créés avec comme but de séparer notre architecture en fonction des besoins renseignés précédemment. Chaque package regroupe un certain nombre de classe possédant chacune une fonction bien précise. Dans cette section, nous allons décrire le besoin que nous avons voulu satisfaire avec le package et le rôle de chaque classe contenue dans le package.
 
 \subsection{BDD}
 
-Ce package contient l'ensemble des médias qui seront disponibles sur l'application (audio, vidéos, questions, langue de la question).
-
-Cette organisation des données a été choisie pour optimiser l'ajout de médias et pour permettre l'ajout d'autres langues à l'application.
+On a créer ce package afin de regrouper les classes qui nous permette de gérer la base de données. En effet, notre base de données est consituée plusieurs entités comme les vidéos, les audios, les questions et enfin les langues. De ce fait, ce package contient l'ensemble des médias qui sera utilisé par l'application. Cette organisation des données a été choisie pour satisfaire et optimiser l'ajout de médias. De plus, si dans un futur proche, notre client souhaite intégrer une nouvelle langue pour ces tests, cet ajout sera simple et rapide.
 
 \subsubsection{Classe DataBase}
+
+Cette classe est très importante dans notre architecture. En effet, c'est elle qui est en lien direct avec la 
 
 \subsubsection{Classes Media, Audio et Video}
 
