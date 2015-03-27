@@ -1,0 +1,8 @@
+# Les ligne commençant par '#' sont des commentaires.
+*.out
+*.pdf
+*.toc
+*.log
+*.blg
+*.aux
+
