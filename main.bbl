@@ -1,0 +1,114 @@
+\begin{thebibliography}{10}
+
+\bibitem{Acero:ICASSP98-II-881}
+A.~Acero.
+\newblock {Source-Filter Models for Time-Scale Pitch-Scale Modification of
+  Speech}.
+\newblock In {\em {Proceedings of the 1998 IEEE International Conference on
+  Acoustics, Speech and Signal Processing}}, Seattle, WA (USA), May 1998.
+
+\bibitem{auberge2002gestalt}
+V{\'e}ronique Auberg{\'e}.
+\newblock A gestalt morphology of prosody directed by functions: the example of
+  a step by step model developed at icp.
+\newblock In {\em Speech Prosody 2002, International Conference}, 2002.
+
+\bibitem{auberge2002prosodie}
+V{\'e}ronique Auberg{\'e}.
+\newblock Prosodie et {\'e}motion.
+\newblock {\em Actes des deuxiemes assises nationales du GdR I}, 3:263--273,
+  2002.
+
+\bibitem{bachorowski1999vocal}
+Jo-Anne Bachorowski.
+\newblock Vocal expression and perception of emotion.
+\newblock {\em Current directions in psychological science}, 8(2):53--57, 1999.
+
+\bibitem{beskow1995rule}
+Jonas Beskow.
+\newblock Rule-based visual speech synthesis.
+\newblock In {\em EUROSPEECH}, 1995.
+
+\bibitem{di2000}
+Albert Di~Cristo.
+\newblock Di cristo 2000.
+\newblock page~3, 2000.
+
+\bibitem{ekman2003unmasking}
+Paul Ekman and Wallace~V Friesen.
+\newblock {\em Unmasking the face: A guide to recognizing emotions from facial
+  clues}.
+\newblock Ishk, 2003.
+
+\bibitem{fourer:hal-00992083}
+Dominique Fourer, Marine Guerry, Takaaki Shochi, Jean-Luc Rouas, Jean-Julien
+  Aucouturier, and Albert Rilliard.
+\newblock {Analyse prosodique des affects sociaux dans l'interaction face {\`a}
+  face en japonais}.
+\newblock In {\em {XXX{\`e}mes Journ{\'e}es d'{\'e}tudes sur la parole}}, Le
+  Mans, France, June 2014.
+
+\bibitem{ghanbari1999video}
+Mohammed Ghanbari.
+\newblock Video coding: an introduction to standard codecs.
+\newblock Institution of Electrical Engineers, 1999.
+
+\bibitem{Gutierrez-Osuna:ISP-PMS}
+Ricardo Gutierrez-Osuna.
+\newblock Prosodic modification of speech.
+\newblock Introduction to Speech Processing.
+
+\bibitem{haagen1994transformation}
+Jesper Haagen.
+\newblock Transformation and decomposition of the speech signal for coding.
+\newblock {\em IEEE signal processing letters}, 1(9):136, 1994.
+
+\bibitem{he2013introduction}
+Yun He, J{\"o}rn Ostermann, Marek Domanski, Oscar~C Au, and Nam Ling.
+\newblock Introduction to the issue on video coding: Hevc and beyond.
+\newblock {\em Selected Topics in Signal Processing, IEEE Journal of},
+  7(6):931--933, 2013.
+
+\bibitem{kreibich2010using}
+Jay Kreibich.
+\newblock {\em Using SQLite}.
+\newblock " O'Reilly Media, Inc.", 2010.
+
+\bibitem{lente2014scenariser}
+Chlo{\'e} Lent{\'e}, Soizick Berthelot, and St{\'e}phanie Buisine.
+\newblock Sc{\'e}nariser l’usage pour am{\'e}liorer la collaboration entre
+  ergonomie, design et ing{\'e}nierie.
+\newblock 2014.
+
+\bibitem{10.4000/alsic.332}
+Philippe Martin.
+\newblock Winpitch ltl, un logiciel multim{\'e}dia d'enseignement de la
+  prosodie.
+\newblock {\em Alsic [en ligne]}, 8(2), 2005.
+
+\bibitem{matsumoto1992american}
+David Matsumoto.
+\newblock American-japanese cultural differences in the recognition of
+  universal facial expressions.
+\newblock {\em Journal of cross-cultural psychology}, 23(1):72--84, 1992.
+
+\bibitem{rouas2006identification}
+Jean-Luc Rouas, Melissa Barkat-Defradas, Fran{\c{c}}ois Pellegrino, Rym Hamdi,
+  et~al.
+\newblock Identification automatique des parlers arabes par la prosodie.
+\newblock {\em Journ{\'e}es d'Etude sur la Parole}, 2006.
+
+\bibitem{solutions2006vlc}
+VideoLan~Streaming Solutions.
+\newblock Vlc media player, 2006.
+
+\bibitem{strauchnosql}
+Christof Strauch, Ultra-Large~Scale Sites, and Walter Kriha.
+\newblock Nosql databases.
+
+\bibitem{valbret1992voice}
+H{\'e}l{\`e}ne Valbret, Eric Moulines, and Jean-Pierre Tubach.
+\newblock Voice transformation using psola technique.
+\newblock {\em Speech Communication}, 11(2):175--187, 1992.
+
+\end{thebibliography}
