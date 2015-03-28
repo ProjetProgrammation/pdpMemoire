@@ -14,9 +14,12 @@ La méthode \textit{main} de Start.java est appelée lors du démarrage de l'app
 \begin{center}
   \fbox{\includegraphics[width=8cm]{./fonctionnement_tests/UserGUI.png}}
   \caption{Fonctionnement - UserGUI}
-  \label{diaglog} 
+  \label{UserGUI} 
 \end{center}
 \end{figure}
+
+Pour récupérer les langues disponibles, UserGUI fait appel au contrôleur, dont nous décrirons le fonctionnement par la suite.
+Les informations entrées par l'utilisateur dans les champs de ``ABOUT YOU'' (voir \textsc{Figure} \ref{UserGUI}) sont récupérés lors du clic sur le bouton ``NEXT''. Ces données sont récupérées dans un fichier \textit{JSON}\footnote{``JavaScript Object Notation (JSON) is a lightweight, text-based, language-independent data interchange format. It was derived from the ECMAScript Programming Language Standard.  JSON defines a small set of formatting rules for the portable representation of structured data.''\cite{bray2014javascript}}.
 
 \subsection{Contrôleur}
 \lipsum[7]

@@ -4,18 +4,22 @@ Dans cette partie nous cherchons à décrire dans un premier temps les fonctionn
 
 \section{Fonctionnement}
 
-
-
-\subsection{Base de données}
-
-\subsubsection{Représentation des données}
-
-
-
+Lorsque l'on lance l'application, on exécute l'interface graphique. Cette interface fait appel aux auters parties de l'architecture pour afficher et organiser ses composants.
 
 \subsection{Interface Graphique (GUI)}
-\lipsum[6]
 
+La méthode \textit{main} de Start.java est appelée lors du démarrage de l'application. Cette méthode fait créé une instance de UserGUI, la première page de l'application qui s'affiche.
+
+\begin{figure}[!ht]
+\begin{center}
+  \fbox{\includegraphics[width=8cm]{./fonctionnement_tests/UserGUI.png}}
+  \caption{Fonctionnement - UserGUI}
+  \label{UserGUI} 
+\end{center}
+\end{figure}
+
+Pour récupérer les langues disponibles, UserGUI fait appel au contrôleur, dont nous décrirons le fonctionnement par la suite.
+Les informations entrées par l'utilisateur dans les champs (voir \textsc{Figure} \ref{UserGUI}) 
 
 \subsection{Contrôleur}
 \lipsum[7]
