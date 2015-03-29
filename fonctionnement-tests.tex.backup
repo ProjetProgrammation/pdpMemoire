@@ -19,7 +19,21 @@ La méthode \textit{main} de Start.java est appelée lors du démarrage de l'app
 \end{figure}
 
 Pour récupérer les langues disponibles, UserGUI fait appel au contrôleur, dont nous décrirons le fonctionnement par la suite.
-Les informations entrées par l'utilisateur dans les champs (voir \textsc{Figure} \ref{UserGUI}) 
+Les informations entrées par l'utilisateur dans les champs de ``ABOUT YOU'' (voir \textsc{Figure} \ref{UserGUI}) sont récupérés lors du clic sur le bouton ``NEXT''. Ces données sont récupérées dans un fichier \textit{txt} par le biais du package \textit{Extract} que nous allons voir plus tard.
+
+Après l'exportation des données sur l'utilisateur, un lien est fait vers la seconde page de l'interface : ChooseGUI (voir \textsc{Figure} \ref{ChooseGUI}). Cette page est une simple page avec deux boutons pour savoir dans quel mode veut aller l'utilisateur (apprentissage da l'application ou test concret).
+
+\newpage
+
+\begin{figure}[!ht]
+\begin{center}
+  \fbox{\includegraphics[width=8cm]{./fonctionnement_tests/ChooseGUI.png}}
+  \caption{Fonctionnement - ChooseGUI}
+  \label{ChooseGUI} 
+\end{center}
+\end{figure}
+
+On est ensuite dirigé vers le page de test (identique dans le mode ``\textsc{training}'' et ``\textsc{not training}''
 
 \subsection{Contrôleur}
 \lipsum[7]
