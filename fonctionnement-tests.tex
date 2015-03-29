@@ -99,7 +99,48 @@ Détaillons un peu plus ces classes :
 Toutes ces fonctions sont par la suite appelées dans le package GUI (voir \ref{GUI}) pour ainsi effectuer le lien avec la base de données.
 
 \subsection{Exportation des données}\label{export}
-\lipsum[8]
+
+Tout ce qui concerne l'exportation des données se situe dans le package \textit{Result}. Ce package est séparé en 
+ éléments :
+ 
+ \begin{itemize}
+  \item \textit{Answer.java} qui permet de créer un objet \textit{Answer} afin centraliser les données à extraire.
+  \item \textit{User.java} qui a la même fonction que la classe précédente, mais qui contient les informations sur l'utilisateur (informations récupérées dans l'interface \textit{UserGUI}, voir \ref{GUI}).
+  \item \textit{Extract} extrait les données contenues dans les deux précédents types d'objet, et les écrit dans un fichier texte, comme dans l'exemple suivant :
+ \end{itemize}
+ 
+ \begin{verbatimtab}
+  Langage:   French
+  User:
+      First Name:   Fabre
+      Last Name:   Thibaut
+      Birthday   26/02/1991
+      Mother Tongue   French
+      Years learning tongue selected   1
+  List of answers
+      Answer 1:
+	    Question:   Pouvez-vous exprimer la douleur avec ces audios et vidéo ?
+	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
+	    Audio   wasted
+      Answer 2:
+	    Question:   Pouvez-vous exprimer le bonheur avec ces audios et vidéo ?
+	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
+	    Audio   wasted
+      Answer 3:
+	    Question:   Pouvez-vous exprimer la passion avec ces audios et vidéo ?
+	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
+	    Audio   mark
+      Answer 4:
+	    Question:   Pouvez-vous exprimer la séduction avec ces audios et vidéo ?
+	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
+	    Audio   mark
+      Answer 5:
+	    Question:   Pouvez-vous exprimer l'exaltation avec ces audios et vidéo ?
+	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
+	    Audio   mark
+
+ \end{verbatimtab}
+
 
 
 \section{Tests}\label{tests}

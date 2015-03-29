@@ -6,7 +6,7 @@ Dans cette partie nous chercherons à décrire dans un premier temps les fonctio
 
 Lorsque l'on lance l'application, on exécute l'interface graphique. Cette interface fait appel aux auters parties de l'architecture pour afficher et organiser ses composants.
 
-\subsection{Interface Graphique (GUI)}
+\subsection{Interface Graphique (GUI)}\label{GUI}
 
 La méthode \textit{main} de Start.java est appelée lors du démarrage de l'application. Cette méthode fait créé une instance de UserGUI, la première page de l'application qui s'affiche.
 
@@ -60,7 +60,7 @@ Les boutons ``\textsc{preview}'' permettent de voir le contenu des vidéos et d'
 \end{center}
 \end{figure}
 
-\subsection{Base de données}
+\subsection{Base de données}\label{BDD}
 
 Le système de gestion de base de données relationnelles (SGBDR) choisi a été \textit{SQLite}. Ce SGBDR est utilisable sur n'importe quelle plateforme, sans nécessiter l'installation et la mise en place d'un serveur, il se résume à un fichier \textit{.db} qui contient toute la base de données.
 Pour le fontionnement de l'application, différentes fonctions d'accès à la base de données ont été necessaires à implémenter :
@@ -75,14 +75,39 @@ Pour le fontionnement de l'application, différentes fonctions d'accès à la ba
 Toutes ces implémentations sont fonctionnelles. Des tests ont été réalisés dessus (voir \ref{tests}).
 Les accès à la base de données sont effectués par le driver \textit{Java} de \textit{SQLite} (\textit{sqlite-jdbc-3.8.7}).
 Pour éviter tout conflit lors de l'accès à la base de données, des transactions manuelles ont été mises en place : un verrou est créé à chaque accès, ainsi un double accès ne peut pas être effectué.
+Etant donné que \textit{SQLite} ne gère pas les contraintes de clef étrangère, nous avons établi un système de vérification en \textit{Java}. Cette vérification vérifie vant chaque modification sensible (suppression d'une vidéo qui pourrait être liée à une question par exemple), qu'aucune dépendance ne sera brisée.
 
 
-\subsection{Contrôleur}
-\lipsum[7]
+\subsection{Contrôleur}\label{controller}
 
+L'architecture Modele-Vue-Controleur(MVC) permettant ``la séparation des éléments principaux d'un système d'interaction d'une couche présentation''\footnote{Citation du cours magistral de PdP de M.Narbel} nous semblait le pattern le mieux adapté au développement de notre application basée sur les liens base de données/interface graphique.
 
-\subsection{Exportation des données}
-\lipsum[8]
+Pour ce faire, nous avons mis en place un package controleur se composant de trois classes :
+
+\begin{itemize}
+  \item \textsc{ControllerDatabase}: Permettant de générer la base de données si elle n'existe pas et d'obtenir les langages disponibles
+  \item \textsc{MediaSelected}: Permettant de récupérer les réponses de l'utilisateur et de les stocker.
+  \item \textsc{SelectMedia}: Permettant la sélection et le choix de media.
+\end{itemize}
+
+Détaillons un peu plus ces classes :
+
+\textsc{ControllerDatabase}:Les fonctions contenues dans cette classe retournent des données(audios/videos/questions) et le compte de ces dites données.
+\textsc{MediaSelected}: Les fonctions contenues dans cette classe retournent des données(utilisateurs/languages) de la base de données existantes et la liste des réponses, liste de réponses que nous pouvons agrémenter grace à la fonction \textit{addAnswer(Answer)}.
+\textsc{SelectMedia}:Les fonctions contenues dans cette classe permettent dans un premier temps à générer des listes stockant les éléments de la base de données, puis dans un second temps d'effectuer une sélection dans les listes créées précédemment.
+
+Toutes ces fonctions sont par la suite appelées dans le package GUI (voir \ref{GUI}) pour ainsi effectuer le lien avec la base de données.
+
+\subsection{Exportation des données}\label{export}
+
+Tout ce qui concerne l'exportation des données se situe dans le package \textit{Result}. Ce package est séparé en 
+ éléments :
+ 
+ \begin{itemize}
+  \item \textit{Answer.java} qui permet de créer un objet \textit{Answer} afin centraliser les données à extraire.
+  \item \textit{User.java} qui a la même fonction que la classe précédente, mais qui contient les informations sur l'utilisateur (informations récupérées dans l'interface \textit{UserGUI}, voir \ref{GUI}).
+  \item \textit{Extract} extrait les données contenues dans les deux précédents types d'objet, et les écrit dans un fichier texte, comme dans l'exemple suivant :
+ \end{itemize}
 
 
 \section{Tests}\label{tests}
