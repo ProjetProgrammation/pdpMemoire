@@ -1,6 +1,6 @@
 \chapter{Fonctionnement et tests}
 
-Dans cette partie nous cherchons à décrire dans un premier temps les fonctionnements, ou, le cas échéant, les non fonctionnements de notre application.  Nous aborderons ensuite la politique de tests effectuée pour vérifier notre code. 
+Dans cette partie nous chercherons à décrire dans un premier temps les fonctionnements, ou, le cas échéant, les non fonctionnements de notre application.  Nous aborderons ensuite la politique de tests effectuée pour vérifier notre code. 
 
 \section{Fonctionnement}
 
@@ -62,6 +62,20 @@ Les boutons ``\textsc{preview}'' permettent de voir le contenu des vidéos et d'
 
 \subsection{Base de données}
 
+Le système de gestion de base de données relationnelles (SGBDR) choisi a été \textit{SQLite}. Ce SGBDR est utilisable sur n'importe quelle plateforme, sans nécessiter l'installation et la mise en place d'un serveur, il se résume à un fichier \textit{.db} qui contient toute la base de données.
+Pour le fontionnement de l'application, différentes fonctions d'accès à la base de données ont été necessaires à implémenter :
+\begin{itemize}
+ \item Création de la base de données et de ses dépendances (si elle n'existe pas)
+ \item Remplissage de la base de données
+ \item Consultation du contenu de la base de données
+ \item Recherche dans la base de données
+ \item Tirage au hasard d'un media de la base de données
+ \item Suppression d'un media de la base de données
+\end{itemize}
+Toutes ces implémentations sont fonctionnelles. Des tests ont été réalisés dessus (voir \ref{tests}).
+Les accès à la base de données sont effectués par le driver \textit{Java} de \textit{SQLite} (\textit{sqlite-jdbc-3.8.7}).
+Pour éviter tout conflit lors de l'accès à la base de données, des transactions manuelles ont été mises en place : un verrou est créé à chaque accès, ainsi un double accès ne peut pas être effectué.
+Etant donné que \textit{SQLite} ne gère pas les contraintes de clef étrangère, nous avons établi un système de vérification en \textit{Java}. Cette vérification vérifie vant chaque modification sensible (suppression d'une vidéo qui pourrait être liée à une question par exemple), qu'aucune dépendance ne sera brisée.
 
 
 \subsection{Contrôleur}
@@ -70,3 +84,6 @@ Les boutons ``\textsc{preview}'' permettent de voir le contenu des vidéos et d'
 
 \subsection{Exportation des données}
 \lipsum[8]
+
+
+\section{Tests}\label{tests}
