@@ -44,7 +44,8 @@ Les données exportées sont :
  \item La vidéo réponse
  \item L'audio réponse
 \end{itemize}
-Ces données sont exportées lors du clic sur le bouton ``\textsc{next}''.
+Ces données sont exportées lors du passage à la question suivante.
+Ces précéden
 
 \begin{figure}[!ht]
 \begin{center}
@@ -54,7 +55,9 @@ Ces données sont exportées lors du clic sur le bouton ``\textsc{next}''.
 \end{center}
 \end{figure}
 
-Les boutons ``\textsc{preview}'' permettent de voir le contenu des vidéos et d'écouter les sons disponibles dans les différentes listes. Afin d'être joués, les médias sont ouverts (voir \textsc{Figure} \ref{VLC} avec VLC (en \textit{standalone}) en faisant appel à la librairie VLC inclue dans le projet.
+Les boutons ``\textsc{preview}'' permettent de voir le contenu des vidéos et d'écouter les sons disponibles dans les différentes listes. Afin d'être joués, les médias sont ouverts (voir \textsc{Figure} \ref{VLC} avec VLC (en \textit{standalone}) en faisant appel à la librairie VLC inclue dans le projet (librairie implémentaée dans la classe \textit{MediaPlayer}). Nous avons choisi d'utiliser ce lecteur de médias car le lecteur par défaut de \textit{JavaFX} est trop strict au niveau des codecs vidéo et audio qu'il accepte. VLC, quant à lui, nous offre la possibilité de lire la totalité des médias que l'on doit traiter. Ensuite, la stratégie du \textit{standalone} a été utilisée, car une intégration d'un lecteur non natif \textit{JavaFX} nécessite l'utilisation de la librairie \textit{Swing}, qui connait énormément de problèmes d'intégration à l'interface \textit{JavaFX}.
+
+Ceci reste tout de même une voie intéressante d'amélioration. Nous avons nous même tenté de palier à ce problème, en convertissant les médias à la volée, en utilisant l'extension \textit{Xuggler}. Cependant, ceci demandait beaucoup de temps, et la duplication de tous les médias (ce qui n'est pas négligeable compte tenu de notre besoin d'avoir une application nomade, donc légère).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -68,7 +71,7 @@ Finalement, une fois le test terminé, l'utilisateur est redirigé vers une page
 
 \begin{figure}[!ht]
 \begin{center}
-  \fbox{\includegraphics[width=8cm]{./fonctionnement_tests/EndGUI.png}}
+  \fbox{\includegraphics[width=8cm]{./fonctionnement_tests/VLC.png}}
   \caption{Fonctionnement - EndGUI}
   \label{VLC} 
 \end{center}
@@ -100,16 +103,13 @@ Etant donné que \textit{SQLite} ne gère pas les contraintes de clef étrangèr
 \subsection{Contrôleur}\label{controller}
 
 
-
-Pour ce faire, nous avons mis en place un package controleur se composant de trois classes :
+Le contrôleur étant le lien entre la base de données (modèle) et l'interface graphique (vue), il est appelé à être utilisé à chaque échange entre la vue et le modèle.
+Considérant la partie \ref{GUI}, on peut comptabiliser X appels :
 
 \begin{itemize}
-  \item \textsc{ControllerDatabase}: Permettant de générer la base de données si elle n'existe pas et d'obtenir les langages disponibles
-  \item \textsc{MediaSelected}: Permettant de récupérer les réponses de l'utilisateur et de les stocker.
-  \item \textsc{SelectMedia}: Permettant la sélection et le choix de media.
+ \item Lors de l'affichage de UserGUI (\textsc{Figure} \ref{UserGUI}), pour retrouver les languages de test disponibles. L'appel est fait vers une méthode de la classe \textit{ControllerDatabse}, elle-même faisant le lien vers la bonne méthode du package \textit{BDD.DataBase}.
+ \item Lors du chargement de la question dans \textit{TestGUI} (\textsc{Figure} \ref{TestGUI}), pour récupérer une question dela base de données
 \end{itemize}
-
-Détaillons un peu plus ces classes :
 
 \textsc{ControllerDatabase}:Les fonctions contenues dans cette classe retournent des données(audios/videos/questions) et le compte de ces dites données.
 \textsc{MediaSelected}: Les fonctions contenues dans cette classe retournent des données(utilisateurs/languages) de la base de données existantes et la liste des réponses, liste de réponses que nous pouvons agrémenter grace à la fonction \textit{addAnswer(Answer)}.
@@ -168,3 +168,17 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
 
 Pour réaliser les tests unitaires sur la base de données, nous avons utilisé le plugin \textit{JUnit}, disponible par défaut dans l'IDE \textit{Netbeans}.
 Ce plugin permet de tester chaque méthode, afin de détecter d'éventuels problèmes d'implémentation.
+
+\subsection{Performances}
+
+Afin de réaliser les tests de performance, nous avons simplement utilisé un plugin de \textit{Netbeans}. Ce plugin permet de mesurer les performance en temps réel.
+
+Sachant déjà que nous avions un problème de performance pendant le chargement de la page \textit{TestGUI} (voir \ref{GUI}), ce test nous a permis d'identifier le code fautif.
+Ainsi, l'accès à la base de données a été mis en cause. La méthode de connexion étant seulement gérée par le driver \textit{SQLite-jdbc}, nous pouvons nous affranchir de tout problème de lenteur dans notre code actuel. Cependant, ce point permet d'envisager une future amélioration à ce niveau là, en déployant un SQGB plus efficace pour notre utilisation.
+
+
+\subsection{Tests boite blanche}
+
+
+
+\subsection{Test de recouvrement}
