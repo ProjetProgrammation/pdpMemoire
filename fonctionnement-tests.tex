@@ -4,9 +4,13 @@ Dans cette partie nous chercherons à décrire dans un premier temps les fonctio
 
 \section{Fonctionnement}
 
-Lorsque l'on lance l'application, on exécute l'interface graphique. Cette interface fait appel aux auters parties de l'architecture pour afficher et organiser ses composants.
+Lorsque l'on lance l'application, on exécute l'interface graphique. Cette interface fait appel aux autres parties de l'architecture pour afficher et organiser ses composants.
 
 \subsection{Interface Graphique (GUI)}\label{GUI}
+
+Tout d'abord, nous allons expliquer notre choix de technologie, qui s'est orienté vers le \textit{JavaFX}.
+Nous pensions dans un premier temps développer l'application en \textit{Java} et générer des pages \textit{HTML} pour l'interface graphique. Puis après des recherches, nous avons découvert le \textit{JavaFX}, qui nous permettait de créer une interface graphique, mais à l'instar de la libraire \textit{Swing}, complètement personnalisable. Nous avons alors choisi ce langage afin d'avoir une application 100\% \textit{Java}.
+
 
 La méthode \textit{main} de Start.java est appelée lors du démarrage de l'application. Cette méthode fait créé une instance de UserGUI, la première page de l'application qui s'affiche.
 
@@ -56,6 +60,16 @@ Les boutons ``\textsc{preview}'' permettent de voir le contenu des vidéos et d'
 \begin{center}
   \fbox{\includegraphics[width=8cm]{./fonctionnement_tests/VLC.png}}
   \caption{Fonctionnement - TestGUI}
+  \label{VLC} 
+\end{center}
+\end{figure}
+
+Finalement, une fois le test terminé, l'utilisateur est redirigé vers une page terminal contenant juste un message de remerciements, ainsi qu'un bouton ramenant vers la première page (\textit{UserGUI}).
+
+\begin{figure}[!ht]
+\begin{center}
+  \fbox{\includegraphics[width=8cm]{./fonctionnement_tests/VLC.png}}
+  \caption{Fonctionnement - EndGUI}
   \label{VLC} 
 \end{center}
 \end{figure}
@@ -114,7 +128,7 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
   \item \textit{Extract} extrait les données contenues dans les deux précédents types d'objet, et les écrit dans un fichier texte, comme dans l'exemple suivant :
  \end{itemize}
  
- \begin{verbatimtab}
+ \begin{verbnobox}[\small]
   Langage:   French
   User:
       First Name:   Georges
@@ -144,7 +158,7 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
 	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
 	    Audio   mark
 
- \end{verbatimtab}
+ \end{verbnobox}
 
 
 
@@ -154,3 +168,17 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
 
 Pour réaliser les tests unitaires sur la base de données, nous avons utilisé le plugin \textit{JUnit}, disponible par défaut dans l'IDE \textit{Netbeans}.
 Ce plugin permet de tester chaque méthode, afin de détecter d'éventuels problèmes d'implémentation.
+
+\subsection{Performances}
+
+Afin de réaliser les tests de performance, nous avons simplement utilisé un plugin de \textit{Netbeans}. Ce plugin permet de mesurer les performance en temps réel.
+
+Sachant déjà que nous avions un problème de performance pendant le chargement de la page \textit{TestGUI} (voir \ref{GUI}), ce test nous a permis d'identifier le code fautif.
+Ainsi, l'accès à la base de données a été mis en cause. La méthode de connexion étant seulement gérée par le driver \textit{SQLite-jdbc}, nous pouvons nous affranchir de tout problème de lenteur dans notre code actuel. Cependant, ce point permet d'envisager une future amélioration à ce niveau là, en déployant un SQGB plus efficace pour notre utilisation.
+
+
+\subsection{Tests boite blanche}
+
+
+
+\subsection{Test de recouvrement}
