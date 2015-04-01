@@ -4,7 +4,7 @@
 \begin{center}
   \fbox{\includegraphics[width=18cm,angle=90]{./architecture/architecture.png}}
   \caption{UML - Architecture}
-  \label{diaglog} 
+  \label{archi} 
 \end{center}
 \end{figure}
 
@@ -25,9 +25,11 @@ Dans cette section, nous allons décrire le besoin que nous avons voulu satisfai
 
 Ce package concerne tout ce qui se rapproche de la base de données. Ainsi, elle possède tous les types d'objets que nous allons insérer et sélectionner :
 \begin{itemize}
- \item \textit{Media}
-  \subitem \textit{Video}
-  \subitem \textit{Audio}
+ \item \textit{Media} :
+ \begin{itemize}
+  \item \textit{Video}
+  \item \textit{Audio}
+ \end{itemize}
  \item \textit{Language}
  \item \textit{Question}
 \end{itemize}
@@ -136,3 +138,21 @@ Ce package regroupe l'ensemble des tests qui seront necessaires pour minimiser l
  \item Tests unitaires avec \textit{JUnit}
  \item Tests de performance avec les outils de \textit{Netbeans}
 \end{itemize}
+
+
+\subsection{ProjectProgAdmin}
+
+Ce package, qui en fait est une application à part entière, mais qui est liée à l'pplication de test prosodique, sert à réaliser l'administration de la base de données, en ligne de commande. L'utilisateur doit passer en paramètre ce qu'il désire faire et le fichier qui contient les médias à ajouter ou supprimer.
+Cette aplication est composée de la classe principale qui est exécutée et d'une classe \textit{Final} qui contient les foncions permettant d'intéragir avec la base de données.
+
+\section{Base de données}
+
+La base de données est composée de quatre tables (voir \textsc{Figure} \ref{MCD}). Ces tables sont les images des classes correspondantes, et contiennent les mêmes attributs que dans les classes \textit{Java}.
+
+\begin{figure}[!h]
+\begin{center}
+  \fbox{\includegraphics[width=8cm]{./architecture/Merise_BDD.png}}
+  \caption{MCD - Base de données}
+  \label{MCD} 
+\end{center}
+\end{figure}
