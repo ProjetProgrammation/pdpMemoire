@@ -167,10 +167,18 @@ Ce plugin permet de tester chaque méthode, afin de détecter d'éventuels probl
 
 \subsection{Performances}
 
-Afin de réaliser les tests de performance, nous avons simplement utilisé un plugin de \textit{Netbeans}. Ce plugin permet de mesurer les performance en temps réel.
+Afin de réaliser les tests de performance, nous avons simplement utilisé un plugin de \textit{Netbeans} (\textsc{Figure} \ref{perf}). Ce plugin permet de mesurer les performance en temps réel.
 
 Sachant déjà que nous avions un problème de performance pendant le chargement de la page \textit{TestGUI} (voir \ref{GUI}), ce test nous a permis d'identifier le code fautif.
 Ainsi, l'accès à la base de données a été mis en cause. La méthode de connexion étant seulement gérée par le driver \textit{SQLite-jdbc}, nous pouvons nous affranchir de tout problème de lenteur dans notre code actuel. Cependant, ce point permet d'envisager une future amélioration à ce niveau là, en déployant un SQGB plus efficace pour notre utilisation.
+
+\begin{figure}[!ht]
+\begin{center}
+  \fbox{\includegraphics[width=15cm]{./fonctionnement_tests/performance.png}}
+  \caption{Tests - Performances}
+  \label{perf} 
+\end{center}
+\end{figure}
 
 
 \subsection{Tests boite blanche}

@@ -123,7 +123,7 @@ Les formats que l’on doit pouvoir supporter sont les suivants :\\
 
 \subsubsection{Faisabilité}
 
-la solution que nous avons utilisé est le lecteur de médias \textit{VLC Media Player} \cite{solutions2006vlc}.
+La solution que nous avons utilisé est le lecteur de médias \textit{VLC Media Player} \cite{solutions2006vlc}.
 
 Ce lecteur va nous permettre d'utiliser les formats vidéo et audio présentés précédemment. De plus, c'est un logiciel accessible (gratuit et sous licence open-source).
 
@@ -132,7 +132,7 @@ De surcroit, il existe une version portable de \textit{VLC Media Player} permett
 \subsubsection{Contingence}
 
 %Partie a modifier pour le jvlc
-Le risque d’utiliser ce genre de logiciel peut être l'impossibilité d'intégrer le lecteur dans une page web (solution choisie dans la section \ref{systems}), si l’application doit s’ouvrir dans un navigateur. Si cette solution n’est pas possible, on pourra ouvrir un lecteur indépendamment de la page web (en \textit{standalone}).
+Le risque d’utiliser ce genre de logiciel peut être l'impossibilité d'intégrer le lecteur dans une interface graphique \textit{JavaFX} (solution choisie dans la section \ref{systems}). Si cette solution n’est pas possible, on pourra ouvrir un lecteur indépendamment en \textit{standalone}\footnote{Utilisation de l'appliation à part entière, et pas dans un plugin ou une extension.}.
 
 \subsubsection{Test}
 

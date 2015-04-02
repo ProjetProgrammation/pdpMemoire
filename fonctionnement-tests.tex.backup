@@ -45,7 +45,7 @@ Les données exportées sont :
  \item L'audio réponse
 \end{itemize}
 Ces données sont exportées lors du passage à la question suivante.
-Ces précéden
+Ces précédentes données sont un choix parmis plusieurs. Ces listes de choix sont sélectionnées par les sous-classes \textit{SonGUI}, \textit{VideoGUI} et \textit{QuestionGUI} qui font le lien vers le contrôleur (voir \ref{controller}) afin de récupérer les médias dans la base de données.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -104,18 +104,14 @@ Etant donné que \textit{SQLite} ne gère pas les contraintes de clef étrangèr
 
 
 Le contrôleur étant le lien entre la base de données (modèle) et l'interface graphique (vue), il est appelé à être utilisé à chaque échange entre la vue et le modèle.
-Considérant la partie \ref{GUI}, on peut comptabiliser X appels :
+Considérant la partie \ref{GUI}, on peut comptabiliser 3 appels :
 
 \begin{itemize}
  \item Lors de l'affichage de UserGUI (\textsc{Figure} \ref{UserGUI}), pour retrouver les languages de test disponibles. L'appel est fait vers une méthode de la classe \textit{ControllerDatabse}, elle-même faisant le lien vers la bonne méthode du package \textit{BDD.DataBase}.
- \item Lors du chargement de la question dans \textit{TestGUI} (\textsc{Figure} \ref{TestGUI}), pour récupérer une question dela base de données
+ \item Lors du chargement de la question dans \textit{TestGUI} (\textsc{Figure} \ref{TestGUI}), pour récupérer une question de la base de données, à partir des sous-classes de l'interface graphique citées dans \ref{GUI}. Cette récupération fait appel à la classe \textit{SelectMedia}, elle-même créant une liste de médias retournée par le package \textit{BDD}.
+ \item Lors du passage à une question suivante dans l'interface graphique \textit{TestGUI}, car les réponses choisies par l'utilisateur sont récupérées, afin de générer une trace de son test. Ces réponses sont donc récupérées par la classe \textit{MediaSelected}, qui fait cette fois un lien vers le package \textit{Result}, que nous décrirons en \ref{export}.
 \end{itemize}
 
-\textsc{ControllerDatabase}:Les fonctions contenues dans cette classe retournent des données(audios/videos/questions) et le compte de ces dites données.
-\textsc{MediaSelected}: Les fonctions contenues dans cette classe retournent des données(utilisateurs/languages) de la base de données existantes et la liste des réponses, liste de réponses que nous pouvons agrémenter grace à la fonction \textit{addAnswer(Answer)}.
-\textsc{SelectMedia}:Les fonctions contenues dans cette classe permettent dans un premier temps à générer des listes stockant les éléments de la base de données, puis dans un second temps d'effectuer une sélection dans les listes créées précédemment.
-
-Toutes ces fonctions sont par la suite appelées dans le package GUI (voir \ref{GUI}) pour ainsi effectuer le lien avec la base de données.
 
 \subsection{Exportation des données}\label{export}
 
