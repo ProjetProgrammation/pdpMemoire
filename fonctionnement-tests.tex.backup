@@ -51,7 +51,7 @@ Ces précédentes données sont un choix parmis plusieurs. Ces listes de choix s
 \begin{center}
   \fbox{\includegraphics[width=8cm]{./fonctionnement_tests/TestGUI.png}}
   \caption{Fonctionnement - TestGUI}
-  \label{ChooseGUI} 
+  \label{TestGUI}
 \end{center}
 \end{figure}
 
@@ -73,7 +73,7 @@ Finalement, une fois le test terminé, l'utilisateur est redirigé vers une page
 \begin{center}
   \fbox{\includegraphics[width=8cm]{./fonctionnement_tests/VLC.png}}
   \caption{Fonctionnement - EndGUI}
-  \label{VLC} 
+  \label{endGUI} 
 \end{center}
 \end{figure}
 
@@ -136,23 +136,7 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
       Answer 1:
 	    Question:   Pouvez-vous exprimer la douleur avec ces audios et vidéo ?
 	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
-	    Audio   wasted
-      Answer 2:
-	    Question:   Pouvez-vous exprimer le bonheur avec ces audios et vidéo ?
-	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
-	    Audio   wasted
-      Answer 3:
-	    Question:   Pouvez-vous exprimer la passion avec ces audios et vidéo ?
-	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
-	    Audio   mark
-      Answer 4:
-	    Question:   Pouvez-vous exprimer la séduction avec ces audios et vidéo ?
-	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
-	    Audio   mark
-      Answer 5:
-	    Question:   Pouvez-vous exprimer l'exaltation avec ces audios et vidéo ?
-	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
-	    Audio   mark
+	    Audio   2013_3_18_S28_fr_L1_ADMI
 
  \end{verbnobox}
 
@@ -160,21 +144,52 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
 
 \section{Tests}\label{tests}
 
-\subsection{JUnit}
+\subsection{Fonctionnel}
+
+\subsubsection{Unitaires}
 
 Pour réaliser les tests unitaires sur la base de données, nous avons utilisé le plugin \textit{JUnit}, disponible par défaut dans l'IDE \textit{Netbeans}.
 Ce plugin permet de tester chaque méthode, afin de détecter d'éventuels problèmes d'implémentation.
 
+Ces tests unitaires ont été effectués majoritairement dans le modèle (voir \ref{modele}), en particulier sur la classe \textit{Database}, cœur de la gestion des données. La seconde partie de ces tests ont été faits dans le contrôleur (voir \ref{archi_controller}), sur les classes \textit{SelectMedia} et \textit{MediaSelected} lors des créations de listes de médias.
+
+\paragraph{Boîte noire}
+
+Les tests boîte noire avec \textit{JUnit} correspondent aux tests d'entrée-sortie. On teste chaque méthode, on donne un objet en entrée et on vérifie que l'objet en sortie est bien le résultat attendu.
+
+\paragraph{Boîte blanche}
+
+Les tests boites blanches avec \textit{JUnit} permettent de vérifier la les différents cas d'utilisation d'une fonction (par exemple, la méthode \textit{addVideo} ajoute une vidéo dans la BDD seulement si celle-ci n'existe pas encore).
+
+
+Afin de contrôler l'efficacité de nos tests, nous avons utilisé un plugin disponible de \textit{Netbeans} (\textit{TikiOne JaCoCoverage Plugin}). Ce plugin surligne en vert, jaune ou rouge , selon les zones de codes parcourues par les tests (voir \textsc{Figure} \ref{cocojava}).
+
+\begin{figure}[!ht]
+\begin{center}
+  \fbox{\includegraphics[width=15cm]{./fonctionnement_tests/CoCoJava.png}}
+  \caption{Tests - Recouvrement des tests}
+  \label{cocojava} 
+\end{center}
+\end{figure}
+
+
 \subsection{Performances}
 
-Afin de réaliser les tests de performance, nous avons simplement utilisé un plugin de \textit{Netbeans}. Ce plugin permet de mesurer les performance en temps réel.
+Afin de réaliser les tests de performance, nous avons simplement utilisé un plugin de \textit{Netbeans} (\textsc{Figure} \ref{perf}). Ce plugin permet de mesurer les performance en temps CPU.
 
 Sachant déjà que nous avions un problème de performance pendant le chargement de la page \textit{TestGUI} (voir \ref{GUI}), ce test nous a permis d'identifier le code fautif.
-Ainsi, l'accès à la base de données a été mis en cause. La méthode de connexion étant seulement gérée par le driver \textit{SQLite-jdbc}, nous pouvons nous affranchir de tout problème de lenteur dans notre code actuel. Cependant, ce point permet d'envisager une future amélioration à ce niveau là, en déployant un SQGB plus efficace pour notre utilisation.
+Ainsi, l'accès à la base de données a été mis en cause. La méthode de connexion étant seulement gérée par le driver \textit{SQLite-jdbc}, nous pouvons nous affranchir de tout problème de lenteur dans notre code actuel. Cependant, ce point permet d'envisager une future amélioration à ce niveau là, en déployant un SGBDR plus efficace pour notre utilisation.
+
+\begin{figure}[!ht]
+\begin{center}
+  \fbox{\includegraphics[width=15cm]{./fonctionnement_tests/performance.png}}
+  \caption{Tests - Performances}
+  \label{perf} 
+\end{center}
+\end{figure}
 
 
-\subsection{Tests boite blanche}
 
 
 
-\subsection{Test de recouvrement}
+
