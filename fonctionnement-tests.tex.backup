@@ -135,16 +135,90 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
   List of answers
       Answer 1:
 	    Question:   Pouvez-vous exprimer la douleur avec ces audios et vidéo ?
-	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
-	    Audio   2013_3_18_S28_fr_L1_ADMI
+	    Video   ADMI_B_ok
+	    Audio   ADMI
 
  \end{verbnobox}
+ 
+ 
+\subsection{Administration}\label{fonction_admi}
+
+L'administration est une application qui fonctionne indépendamment de l'application graphique. Elle est lancée en ligne de commande (\textit{java -jar <fichier.jar> <paramètre 0> <paramètre 1> <paramètre 2>}), les paramètres correspondants aux différentes fonctionnalités. Nous allons décrire le fonctionnement de cette application en partant des choix de paramètres possibles, récapitulés ci-dessous :
+
+\begin{figure}[!ht]
+\begin{center}
+\begin{tabularx}{17cm}{|c|p{6cm}|X|}
+ \hline
+ Paramètre 0 & Paramètre 1 & Paramètre 2\\
+ \hline
+	& video		& \tabularnewline
+ add	& audio		& <fichier>\tabularnewline
+	& question	& \tabularnewline
+\hline
+	& video		& \tabularnewline
+ rm	& audio		& <fichier>\tabularnewline
+	& question	& \tabularnewline
+\hline
+	& video		& \tabularnewline
+ ls	& audio		& \tabularnewline
+	& question	& \tabularnewline
+ \hline
+\end{tabularx}
+\end{center}
+\caption{Fonctionnement - Utilisation de l'application d'administration}
+\end{figure}
+
+
+\subsubsection{Des paramètres aux actions}
+
+Ce paramètre correspont à quel type d'action on veut effectuer :
+\begin{itemize}
+ \item add : ajouter du contenu
+ \item rm  : supprimer du contenu
+ \item ls  : afficher du contenu
+\end{itemize}
+
+\paragraph{add}
+
+L'ajout de contenu se fait par le biais d'un fichier (sans extension) contenant du simple texte.
+Ce texte doit être formatté selon les règles suivantes :
+\begin{itemize}
+ \item Ajout de vidéos : le nom d'une vidéo par ligne, selon la syntaxe :
+  \begin{verbnobox}[\small][0-9]*\_[0-9]*\_[0-9]*\_[a-zA-Z0-9]*\_[a-z]{2}\_[a-zA-Z0-9]*\_[a-zA-Z0-9]*.[a-zA-Z0-9]*\end{verbnobox}
+  Comme par exemple :
+ \begin{verbnobox}[\small]
+  2013_3_20_S33_fr_L1_OBVI_B_ok.mp4
+  2013_3_20_S33_fr_L1_SEDU_B_ok.mp4
+  2013_3_20_S33_fr_L1_SINC_B_ok.mp4
+ \end{verbnobox}
+ \item Ajout d'audios : le nom d'un audio par ligne, selon la syntaxe :
+  \begin{verbnobox}[\small][0-9]*\_[0-9]*\_[0-9]*\_[a-zA-Z0-9]*\_[a-z]{2}\_[a-zA-Z0-9]*\_[a-zA-Z0-9]*. [a-zA-Z0-9]*\end{verbnobox}
+  Comme par exemple :
+ \begin{verbnobox}[\small]
+  2013_3_20_S33_fr_L1_OBVI.wav
+  2013_3_20_S33_fr_L1_SEDU.wav
+  2013_3_20_S33_fr_L1_SINC.wav
+ \end{verbnobox}
+ \item Ajout de questions : par groupe de trois lignes avec :
+  \subitem Première ligne  : contenu de la question
+  \subitem Seconde ligne   : vidéo attendue en réponse (avec la même syntaxe que lors de l'ajout de vidéos)
+  \subitem Troisième ligne : audio attendu en réponse (avec la même syntaxe que lors de l'ajout d'audios)
+  \subitem Comme par exemple :
+ \begin{verbnobox}[\small]
+  Can you express empathy?
+  2013_3_20_S33_fr_L1_SEDU_B_ok.mp4
+  2013_3_20_S33_fr_L1_SINC.wav
+  Can you express pleasure?
+  2013_3_20_S33_fr_L1_SURP_B_ok.mp4
+  2013_3_20_S33_fr_L1_SINC.wav
+ \end{verbnobox}
+\end{itemize}
 
 
 
 \section{Tests}\label{tests}
 
-\subsection{Fonctionnel}
+\subsection{Fonctionnels}
 
 \subsubsection{Unitaires}
 
@@ -162,7 +236,7 @@ Les tests boîte noire avec \textit{JUnit} correspondent aux tests d'entrée-sor
 Les tests boites blanches avec \textit{JUnit} permettent de vérifier la les différents cas d'utilisation d'une fonction (par exemple, la méthode \textit{addVideo} ajoute une vidéo dans la BDD seulement si celle-ci n'existe pas encore).
 
 
-Afin de contrôler l'efficacité de nos tests, nous avons utilisé un plugin disponible de \textit{Netbeans} (\textit{TikiOne JaCoCoverage Plugin}). Ce plugin surligne en vert, jaune ou rouge , selon les zones de codes parcourues par les tests (voir \textsc{Figure} \ref{cocojava}).
+Afin de contrôler l'efficacité de nos tests, nous avons utilisé un plugin disponible de \textit{Netbeans} (\textit{TikiOne JaCoCoverage Plugin}). Ce plugin surligne en vert (zones parcourues), jaune (zones parcourues, mais pas dans toutes les branches) ou rouge (zones non-parcourues, les erreurs en général), selon les zones de codes parcourues par les tests (voir \textsc{Figure} \ref{cocojava}).
 
 \begin{figure}[!ht]
 \begin{center}

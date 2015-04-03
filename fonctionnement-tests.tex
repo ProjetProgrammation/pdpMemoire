@@ -135,12 +135,96 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
   List of answers
       Answer 1:
 	    Question:   Pouvez-vous exprimer la douleur avec ces audios et vidéo ?
-	    Video   2013_3_19_S29_fr_L1_ADMI_B_ok
-	    Audio   2013_3_18_S28_fr_L1_ADMI
+	    Video   ADMI_B_ok
+	    Audio   ADMI
 
  \end{verbnobox}
+ 
+ 
+\subsection{Administration}\label{fonction_admi}
+
+L'administration est une application qui fonctionne indépendamment de l'application graphique. Elle est lancée en ligne de commande (\textit{java -jar <fichier.jar> <paramètre 0> <paramètre 1> <paramètre 2>}), les paramètres correspondants aux différentes fonctionnalités. Nous allons décrire le fonctionnement de cette application en partant des choix de paramètres possibles, récapitulés ci-dessous :
+
+\begin{figure}[!ht]
+\begin{center}
+\begin{tabularx}{17cm}{|c|p{6cm}|X|}
+ \hline
+ Paramètre 0 & Paramètre 1 & Paramètre 2\\
+ \hline
+	& video		& \tabularnewline
+ add	& audio		& <fichier>\tabularnewline
+	& question	& \tabularnewline
+\hline
+	& video		& \tabularnewline
+ rm	& audio		& <fichier>\tabularnewline
+	& question	& \tabularnewline
+\hline
+	& video		& \tabularnewline
+ ls	& audio		& \tabularnewline
+	& question	& \tabularnewline
+ \hline
+\end{tabularx}
+\end{center}
+\caption{Fonctionnement - Utilisation de l'application d'administration}
+\end{figure}
 
 
+\subsubsection{Des paramètres aux actions}
+
+Ce paramètre correspont à quel type d'action on veut effectuer :
+\begin{itemize}
+ \item add : ajouter du contenu
+ \item rm  : supprimer du contenu
+ \item ls  : afficher du contenu
+\end{itemize}
+
+\paragraph{add}
+
+L'ajout de contenu se fait par le biais d'un fichier (sans extension) contenant du simple texte.
+Ce texte doit être formatté selon les règles suivantes :
+\begin{itemize}
+ \item Ajout de vidéos : le nom d'une vidéo par ligne, selon la syntaxe :
+  \begin{verbnobox}[\small][0-9]*\_[0-9]*\_[0-9]*\_[a-zA-Z0-9]*\_[a-z]{2}\_[a-zA-Z0-9]*\_[a-zA-Z0-9]*.[a-zA-Z0-9]*\end{verbnobox}
+  Comme par exemple :
+ \begin{verbnobox}[\small]
+  2013_3_20_S33_fr_L1_OBVI_B_ok.mp4
+  2013_3_20_S33_fr_L1_SEDU_B_ok.mp4
+  2013_3_20_S33_fr_L1_SINC_B_ok.mp4
+ \end{verbnobox}
+ \item Ajout d'audios : le nom d'un audio par ligne, selon la syntaxe :
+  \begin{verbnobox}[\small][0-9]*\_[0-9]*\_[0-9]*\_[a-zA-Z0-9]*\_[a-z]{2}\_[a-zA-Z0-9]*\_[a-zA-Z0-9]*. [a-zA-Z0-9]*\end{verbnobox}
+  Comme par exemple :
+ \begin{verbnobox}[\small]
+  2013_3_20_S33_fr_L1_OBVI.wav
+  2013_3_20_S33_fr_L1_SEDU.wav
+  2013_3_20_S33_fr_L1_SINC.wav
+ \end{verbnobox}
+ \item Ajout de questions : par groupe de trois lignes avec :
+  \subitem Première ligne  : contenu de la question
+  \subitem Seconde ligne   : vidéo attendue en réponse (avec la même syntaxe que lors de l'ajout de vidéos)
+  \subitem Troisième ligne : audio attendu en réponse (avec la même syntaxe que lors de l'ajout d'audios)
+  \subitem Comme par exemple :
+ \begin{verbnobox}[\small]
+  Can you express empathy?
+  2013_3_20_S33_fr_L1_SEDU_B_ok.mp4
+  2013_3_20_S33_fr_L1_SINC.wav
+  Can you express pleasure?
+  2013_3_20_S33_fr_L1_SURP_B_ok.mp4
+  2013_3_20_S33_fr_L1_SINC.wav
+ \end{verbnobox}
+\end{itemize}
+
+Ces ajouts font appel à une méthode d'ajout de médias, sachant de quel type de média il s'agit. Cette méthode rempli la BDD après avoir appelé une méthode d'extraction des données du fichier passé en paramètre à l'aide de \textit{regex}.
+
+\paragraph{rm}
+
+La suppression de contenu se fait d'une manière similaire à l'ajout : une méthode est chargée de la suppression en BDD des médias, faisant elle-même appel à la fonction d'extraction des données, pour identifier les tuples à supprimer. Ensuite, une fonction gestion de l'intégrité de la BDD vérifie que ces médias ne sont pas liés à une question encore existante.
+
+Seule la suppression de question diffère de l'ajout : seul le nom des questions doit être entré dans le fichier passé en paramètre. Le fonctionnement reste ensuite identique à la suppression de vidéos ou d'audios.
+
+\paragraph{ls}
+
+Comme dans un terminal \textit{Shell}, le paramètre \textbf{ls} permet de lister le contenu de la BDD. Pour afficher ce contenu, une méthode fait appel à la méthode de listage de toute une table de la BDD dans la classe \textit{DataBase}, du package \textit{BDD} de l'application graphique.
 
 \section{Tests}\label{tests}
 

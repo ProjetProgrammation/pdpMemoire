@@ -12,7 +12,7 @@ L'architecture \textbf{M}odele-\textbf{V}ue-\textbf{C}ontroleur (\textbf{MVC}) p
 
 De plus, grâce à ce \textit{design pattern}, nous avons pu répartir les rôles de chacun afin de produire un travail efficace.
 
-\section{Explication détaillée des packages}
+\section{Application graphique, contenu des packages}
 
 Notre architecture est structuré en plusieurs packages. Ils ont été créés avec comme but de compartimenter notre architecture en fonction des besoins renseignés précédemment. Chaque package regroupe un certain nombre de classes, chacune possédant une fonction bien précise.
 
@@ -156,3 +156,25 @@ La base de données est composée de quatre tables (voir \textsc{Figure} \ref{MC
   \label{MCD} 
 \end{center}
 \end{figure}
+
+
+
+\section{Application tierce : administration}
+
+Nous avons décidé de complètement séparer l'administration de l'application de test prosodique. Ceci afin que l'administration se fasse beaucoup plus rapidement en ligne de commande depuis un système d'exploitation Linux.
+Cette application tierce est composée de deux classes :
+
+\begin{itemize}
+ \item \textit{main.java} : contient toutes les appels aux méthodes d'administration de la base de données.
+ \item \textit{AdminDatabase.java} : classe \textit{final} contient les méthodes \textit{static} d'administration de la base de données suivantes :
+ \begin{itemize} 
+  \item Extraction de données d'un fichier (contenant les médias à ajouter ou supprimer)
+  \item Affichage dans le terminal du contenu de la base de données
+  \item Ajout d'une liste de médias/questions
+  \item Suppression d'une liste de médias/questions
+  \item Toute autre méthode nécessaire au fonctionnement des précédentes
+ \end{itemize}
+\end{itemize}
+
+
+Cette application tierce sera lancée en ligne de commande en exécutant le fichier \textit{.jar} suivi des paramètres adéquats d'administration. La syntaxe de ces paramètres sera précisée dans la \textit{Javadoc} de l'application.
