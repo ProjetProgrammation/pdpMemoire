@@ -4,7 +4,18 @@ Dans cette partie nous chercherons à décrire dans un premier temps les fonctio
 
 \section{Fonctionnement}
 
+L'application est séparée en deu modules, qui sont le module de test prosodique contenant l'interface graphique, et un module d'administration utilisable en ligne de commande. Ces deux modules partagent la même base de données. Ces deux modules sont donc, une fois compilés et compressés dans des \textit{jar}, situés dans le même répertoire, pour accéder à la même BDD commune. Afin de garder une organisation des fichiers qui seront créés, nous avons établi un script créant toute l'organisation des fichiers de l'application lors de sa première utilisation. Ce script créé les répertoire avec l'organisation suivante :
+
+\begin{figure}[!ht]
+\begin{center}
+  \fbox{\includegraphics[width=5cm]{./fonctionnement_tests/tree.jpg}}
+  \caption{Fonctionnement - Organisation répertoires}
+  \label{tree} 
+\end{center}
+\end{figure}
+
 Lorsque l'on lance l'application, on exécute l'interface graphique. Cette interface fait appel aux autres parties de l'architecture pour afficher et organiser ses composants.
+Mais avant de pouvoir lancer l'interface graphique, l'administrateur qui fait réaliser le test prosodique doit remplir la base de données.
 
 \subsection{Interface Graphique (GUI)}\label{GUI}
 
@@ -214,7 +225,17 @@ Ce texte doit être formatté selon les règles suivantes :
  \end{verbnobox}
 \end{itemize}
 
+Ces ajouts font appel à une méthode d'ajout de médias, sachant de quel type de média il s'agit. Cette méthode rempli la BDD après avoir appelé une méthode d'extraction des données du fichier passé en paramètre à l'aide de \textit{regex}.
 
+\paragraph{rm}
+
+La suppression de contenu se fait d'une manière similaire à l'ajout : une méthode est chargée de la suppression en BDD des médias, faisant elle-même appel à la fonction d'extraction des données, pour identifier les tuples à supprimer. Ensuite, une fonction gestion de l'intégrité de la BDD vérifie que ces médias ne sont pas liés à une question encore existante.
+
+Seule la suppression de question diffère de l'ajout : seul le nom des questions doit être entré dans le fichier passé en paramètre. Le fonctionnement reste ensuite identique à la suppression de vidéos ou d'audios.
+
+\paragraph{ls}
+
+Comme dans un terminal \textit{Shell}, le paramètre \textbf{ls} permet de lister le contenu de la BDD. Pour afficher ce contenu, une méthode fait appel à la méthode de listage de toute une table de la BDD dans la classe \textit{DataBase}, du package \textit{BDD} de l'application graphique.
 
 \section{Tests}\label{tests}
 
