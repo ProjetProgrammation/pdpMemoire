@@ -4,7 +4,7 @@ Dans cette partie nous chercherons à décrire dans un premier temps les fonctio
 
 \section{Fonctionnement}
 
-L'application est séparée en deu modules, qui sont le module de test prosodique contenant l'interface graphique, et un module d'administration utilisable en ligne de commande. Ces deux modules partagent la même base de données. Ces deux modules sont donc, une fois compilés et compressés dans des \textit{jar}, situés dans le même répertoire, pour accéder à la même BDD commune. Afin de garder une organisation des fichiers qui seront créés, nous avons établi un script créant toute l'organisation des fichiers de l'application lors de sa première utilisation. Ce script créé les répertoire avec l'organisation suivante :
+L'application est séparée en deux modules, qui sont le module de test prosodique contenant l'interface graphique, et un module d'administration utilisable en ligne de commande. Ces deux modules partagent la même BDD. Ils sont donc, une fois compilés et compressés dans des \textit{jar}, situés dans le même répertoire, pour accéder à une BDD commune. Afin de garder une organisation des fichiers qui seront créés ou importés, nous avons codé un script créant toute l'organisation des fichiers de l'application lors de sa première utilisation. Ce script crée les répertoires avec l'arborescence suivante :
 
 \begin{figure}[!ht]
 \begin{center}
@@ -14,8 +14,9 @@ L'application est séparée en deu modules, qui sont le module de test prosodiqu
 \end{center}
 \end{figure}
 
-Lorsque l'on lance l'application, on exécute l'interface graphique. Cette interface fait appel aux autres parties de l'architecture pour afficher et organiser ses composants.
-Mais avant de pouvoir lancer l'interface graphique, l'administrateur qui fait réaliser le test prosodique doit remplir la base de données.
+Il est bien évident qu'avant toute utilisation du test prosodique, l'administrateur doit remplir la BDD avec des vidéos, des audios et des questions, sans quoi la BDD sera vide, et le test prosodique impossible.
+
+Lorsque l'on lance l'application de test prosodique, on exécute l'interface graphique (dans le package \textit{GUI}). Cette interface fait appel aux autres parties de l'architecture pour afficher et organiser ses composants.
 
 \subsection{Interface Graphique (GUI)}\label{GUI}
 
@@ -158,7 +159,7 @@ L'administration est une application qui fonctionne indépendamment de l'applica
 
 \begin{figure}[!ht]
 \begin{center}
-\begin{tabularx}{17cm}{|c|p{6cm}|X|}
+\begin{tabularx}{17cm}{|c|c|c|}
  \hline
  Paramètre 0 & Paramètre 1 & Paramètre 2\\
  \hline
@@ -180,7 +181,7 @@ L'administration est une application qui fonctionne indépendamment de l'applica
 \end{figure}
 
 
-\subsubsection{Des paramètres aux actions}
+\subsubsection{Paramètres et leurs actions}
 
 Ce paramètre correspont à quel type d'action on veut effectuer :
 \begin{itemize}

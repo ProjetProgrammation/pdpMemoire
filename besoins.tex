@@ -2,6 +2,7 @@
 
 \section{Fonctionnement de l'application}
 
+Nous posons d'abord les bases de l'application, c'est à dire son foctionnement global, tous les états dans lesquels il sera possible de se trouver, comment y arriver et comment en sortir.
 
  \begin{figure}[!ht]
  \begin{center}
@@ -38,60 +39,63 @@ Les besoins sont classés par priorité dans leur ordre d'apparition. De plus, c
 
 \section{Besoins fonctionnels}\label{besoins_fonctionnels}
 
-\subsection{Application multi-Plateforme: Utiliser l’application sur les systèmes d’exploitation principaux et récents}\label{systems}
+\subsection{Utiliser l’application sur les systèmes d’exploitation principaux et récents}\label{systems}
 
 \subsubsection{Description}
 
-L’application sera utilisée sur les principaux systèmes d’exploitations actuels (\textit{Microsoft Windows 7}, \textit{Ubuntu 12.04}, \textit{Debian 6.0}, \textit{MAC OS X 10.9}) et les versions plus récentes de ces systèmes d’exploitation.
+Etant donné que notre client sera amené à transporter l’application, il faut que celle-ci puisse fonctionner sur différents environnements à savoir \textit{Microsoft Windows 7}, \textit{Ubuntu 12.04}, \textit{Debian 6.0}, \textit{MAC OS X 10.9} et les versions plus récentes de ces systèmes d’exploitation.
 L’application est susceptible de fonctionner sur d’autres systèmes d’exploitation (par compatibilité de noyau) sans toutefois de garantie de ce fonctionnement.
 
 \subsubsection{Faisabilité}
 
-Cette condition est remplie en utilisant une application JavaFX, supportée par les environnements possédant un java à jours.
+Cette condition est remplie en utilisant une application \textit{JavaFX}, supportée par les environnements possédant un environnement \textit{Java} à jour (la version 8 étant nécessaire pour le fonctionnement optimal de \textit{JavaFX}).
 
 \subsubsection{Contingence}
 
-Le risque principal est que le client travaille sur une machine ne possédant pas un java à jours. Pour pallier à cette problématique une note de fonctionnement est disponible avec notre application.
+Le risque principal serait que le client travaille sur une machine ne possédant pas un environnement \textit{Java} à jour. Pour pallier à ce problème, nous avons proposerons un script d'installation du dernier environnement \textit{Java}.
 
 \subsubsection{Test}
 
-Pour assurer la réponse à ce besoin nous avons lancé l’application sur les différents systèmes d’exploitations et observé si des problèmes apparaissaient.
+Lancer l'application dans chacun des systèmes d’exploitation cités précédemment. L'application devra fonctionner sur chacun de ces systèmes d'exploitation, sans quoi, la contrainte ne serait pas remplie.
 
 \subsubsection{Priorité : \textit{Critique}}
 
-\subsection{Application nomade}\label{nomadite}
+\subsection{Rendre l'application nomade}\label{nomadite}
 
 \subsubsection{Description}
 
-Pour effectuer ses études, notre client ne souhaite pas transporter sa machine sur les lieux où elles se déroulent. Pour cela, il faut donc avoir une application transportable sur un périphérique externe de type clef USB ou SSD externe.
+Pour effectuer ses études, notre client ne souhaite pas transporter sa machine sur les lieux où elles se déroulent. Pour cela, il faut donc avoir une application transportable sur un périphérique externe de type clef USB.
 
 \subsubsection{Faisabilité}
 
-Pour remplir cette condition, tous les composants de l’application seront stockés sur une clef USB ou un disque dur externe afin que le client puisse l'utiliser sur n’importe quel ordinateur.
+Pour remplir cette condition, tous les composants de l’application compilée seront stockés sur une clef USB ou un disque dur externe, afin que le client puisse l'utiliser sur n’importe quel ordinateur.
 
 \subsubsection{Contingence}
 
-Le risque serait que le formatage de la partition de la clef USB ne soit pas pris en compte par le système d’exploitation de la machine (par exemple le formatage \textit{NTFS} de \textit{Windows} n’est pas reconnu par le système \textit{Mac OS}, le formatage \textit{EXT4} du système \textit{Ubuntu} n’est pas reconnu par les systèmes d’exploitation \textit{Windows}). Pour éviter cela, la clef devra être formatée en \textit{FAT32} qui est un formatage de partition reconnu par les systèmes d’exploitation cités dans la section \ref{systems}.
+Le risque serait que le formatage de la partition de la clef USB ne soit pas pris en compte par le système d’exploitation de la machine (par exemple le formatage \textit{NTFS} de \textit{Windows} est reconnu par le système \textit{Mac OS}, mais accessible en lecture seule, le formatage \textit{EXT4} du système \textit{Ubuntu} n’est pas reconnu par les systèmes d’exploitation \textit{Windows}). Pour éviter cela, la clef devra être formatée en \textit{FAT32}, qui est un formatage de partition reconnu par les systèmes d’exploitation cités dans la section \ref{systems}.
 
 \subsubsection{Test}
 
-Faire fonctionner l’application à partir d’une clef USB (ou disque dur externe selon le support qui sera choisi) sur les différents systèmes d’exploitations cités précédemment.
+Faire fonctionner l’application à partir d’une clef USB (ou disque dur externe selon le support qui sera choisi) sur les différents systèmes d’exploitations cités précédemment. L'application devra fonctionner en \textit{standalone}, sauf dans le cas d'un environnement \textit{Java} non à jour, comme précisé en \ref{systems}.
 
 \subsubsection{Priorité : \textit{Critique}}
 
 \subsection{Ajouter du contenu multimédia et des questions}
 
 \subsubsection{Description}
-Pour avoir un aspect évolutif et personnalisable ,le client doit pouvoir enregistrer dans la base de données, de nouvelles vidéos et de nouveaux sons afin d’augmenter l’efficience de ses tests. De plus, pour améliorer ses recherches, notre client pourra ajouter des questions avec leurs correspondances audios et vidéos.
-Tout ceci pouvant être fais en ligne de commande linux.
+
+Le client doit pouvoir enregistrer dans la base de données, de nouvelles vidéos et de nouveaux sons afin d’augmenter l’efficience de ses tests. De plus, pour améliorer ses recherches, notre client pourra ajouter des questions avec leurs correspondances audios et vidéos.
+Cet ajout de médias devra être possible en ligne de commande sous un système \textit{Unix}, en passant un fichier texte dans un paramètre.
 
 \subsubsection{Faisabilité}
 
 Pour faciliter cette gestion, nous utiliserons une base de données. Les données seront plus facilement accessibles lors de l’utilisation de l’application.
+Puis, pour réaliser l'administration en ligne de commande, une application annexe sera développée. Cette application sera en \textit{Java} et disposera des arguments nécessaires pour ajouter et lister les médias dans la base de données.
 
 \subsubsection{Test}
 
-Pour remplir cette nécessité nous avons ajouter du contenu multimédia (audio et video) et une question puis lister tout le contenu de la base de données pour voir si l’ajout à été pris en compte.
+Ajouter du contenu multimédia (audio et video) et une question puis lister tout le contenu de la base de données pour voir si l’ajout à été pris en compte.
+Une réussie du test se concluera par une base de données remplie via l'application annexe, et une application graphique qui fonctionnera (qui accèdera au médias et les affichera).
 
 \subsubsection{Priorité : \textit{Moyenne}}
 
@@ -99,7 +103,7 @@ Pour remplir cette nécessité nous avons ajouter du contenu multimédia (audio 
 
 \subsubsection{Description}
 
-Le contenu multimédia de notre client étant composé de différents formats vidéos et audios ainsi que de codecs specifiques, l’application doit donc pouvoir assurer une lecture optimale.
+Le contenu multimédia de notre client étant composé de différents formats vidéos et audios, utilisants des codecs variés, l’application doit pouvoir assurer une lecture optimale de ces médias.
 
 Effectivement, c’est un obstacle que l’on rencontre dès que l’on commence à programmer dans le domaine de la vidéo et de l’audio (des références étudiant certaines de ces contraintes : \cite{ghanbari1999video} et \cite{he2013introduction}).
 Le fond du problème est l’utilisation de Codecs (vidéo et audio) pour lire les différents types de fichiers, qui sont encodés selon différentes normes.
@@ -123,7 +127,7 @@ Les formats que l’on doit pouvoir supporter sont les suivants :\\
 
 \subsubsection{Faisabilité}
 
-La solution que nous avons utilisé est le lecteur de médias \textit{VLC Media Player} \cite{solutions2006vlc}.
+Une solution que nous avons trouvé est le lecteur de médias \textit{VLC Media Player} \cite{solutions2006vlc}.
 
 Ce lecteur va nous permettre d'utiliser les formats vidéo et audio présentés précédemment. De plus, c'est un logiciel accessible (gratuit et sous licence open-source).
 
@@ -132,7 +136,7 @@ De surcroit, il existe une version portable de \textit{VLC Media Player} permett
 \subsubsection{Contingence}
 
 %Partie a modifier pour le jvlc
-Le risque d’utiliser ce genre de logiciel peut être l'impossibilité d'intégrer le lecteur dans une interface graphique \textit{JavaFX} (solution choisie dans la section \ref{systems}). Si cette solution n’est pas possible, on pourra ouvrir un lecteur indépendamment en \textit{standalone}\footnote{Utilisation de l'appliation à part entière, et pas dans un plugin ou une extension.}.
+Le risque d’utiliser ce genre de logiciel peut être l'impossibilité d'intégrer le lecteur dans une interface graphique \textit{JavaFX} (solution choisie dans la section \ref{systems}). Si cette solution n’est pas possible, on pourra ouvrir un lecteur en \textit{standalone}\footnote{Utilisation de l'application à part entière, et pas dans un plugin ou une extension.}.
 
 \subsubsection{Test}
 
@@ -144,17 +148,17 @@ Création d’un script qui ouvrira toutes les vidéos disponibles et vérifiera
 
 \subsubsection{Description}
 
-L’application a pour but de répondre à une série de questions dont les réponses sont une vidéo, un son ou une combinaison des deux.\\
+L’application a pour but de répondre à une série de questions dont les réponses sont une vidéo et un son.\\
 Ces combinaisons sont importantes pour notre client, nous devons donc les récupérer.
 
 \subsubsection{Faisabilité}
 
-La solution à ce besoin est une base de données, stockant l’ensemble des questions, sons, vidéos et réponses/résultats.
-L’application exporte les données sous forme d’un fichier \textit{txt}, fichier qu’exploitera le client.   
+La solution à ce besoin serait une base de données, stockant l’ensemble des questions, sons, vidéos et réponses attendues.
+L’application devra ensuite exporter les réponses et l'identité de l'utilisateur sous forme d’un fichier \textit{txt}, fichier qu’exploitera le client.   
 
 \subsubsection{Test}
 
-Faire faire le test à un faux sujet, et vérifier les données exportées dans le fichier \textit{txt}.
+Faire faire le test à un faux sujet, et vérifier les données exportées dans le fichier \textit{txt}. Il sera possible de lire le contenu de cet export facilement, avec un éditeur de texte.
 
 \subsubsection{Priorité : \textit{Moyenne}}
 
@@ -175,7 +179,7 @@ Les informations que l’on doit récupérer sont les suivantes :\\
 
 \subsubsection{Faisabilité}
   
-	Pour répondre à ce besoin, nous avons implémenté un formulaire d’enregistrement au lancement de l’application.
+Pour répondre à ce besoin, il faut implémenter un formulaire au lancement de l’application.
 
 \subsubsection{Test}
 
@@ -189,16 +193,17 @@ Faire essayer l’application à une personne tierce, puis, vérifier que toutes
 
 \subsubsection{Description}
 
-L’application que nous livrons n’est pas une finalité mais seulement une étape dans un projet beaucoup plus vaste. Ainsi, d’autres personnes devront probablement modifier cette application afin de répondre à de nouveaux besoins. Ces nouveaux développeurs dispose de tous les éléments nécessaires pour comprendre notre travail.                                                                                                                                                                                                                                                                                       
+L’application que nous allons livrer ne sera pas une finalité mais seulement une étape dans un projet beaucoup plus vaste. Ainsi, d’autres personnes devront probablement modifier cette application afin de répondre à de nouveaux besoins. Ces nouveaux développeurs devront disposer de tous les éléments nécessaires pour comprendre notre travail. 
+
 \subsubsection{Faisabilité}
 
-Il est possible de répondre à ce besoin en documentant notre code. Il existe par exemple en \textit{Java}, la \textit{Javadoc}, qui est générable avec des commentaires spéciaux. Elle est exportable en \textit{PDF} et contient toutes les explications necessaires à la compréhension du code. 
+Il est possible de répondre à ce besoin en documentant notre code. Il existe par exemple en \textit{Java}, la \textit{Javadoc}, qui est générable avec des commentaires spéciaux. Elle est exportable en \textit{HTML} et contient toutes les explications necessaires à la compréhension du code. 
 
-De plus, nous avons ajouté des commentaires quand une fonction était trop complexe et que des indications intermédiaires furent nécessaires.
+De plus, il faudra ajouter des commentaires quand une fonction sera trop complexe et que des indications intermédiaires seront nécessaires.
 
 \subsubsection{Test}
 
-Demander à un développeur externe au projet d’essayer de comprendre notre code.
+Demander à un développeur externe au projet d’essayer de comprendre notre code, et d'ajouter une fonctionnalité.
 
 \subsubsection{Priorité : \textit{moyenne}}
 
@@ -206,17 +211,17 @@ Demander à un développeur externe au projet d’essayer de comprendre notre co
 
 \subsubsection{Description}
 
-L’application se veut ergonomique pour permettre au sujet de se concentrer un maximum sur le test et pas sur le fonctionnement de ladite application. De plus, le sujet soumis au test sera possiblement novice en informatique.
+L’application sera ergonomique pour permettre au sujet de se concentrer un maximum sur le test et pas sur le fonctionnement de ladite application. De plus, le sujet soumis au test sera possiblement novice en informatique, l’application devra ainsi être intuitive.
 
 \subsubsection{Faisabilité}
 
-Pour satisfaire ce besoin, nous avons mis en place un graphisme épuré de tout accessoires détournant l’attention. De plus, nous utilisons des couleurs de ton pastel pour éviter de fatiguer le regard de l’utilisateur.
+Pour satisfaire ce besoin, nous devons mettre en place un graphisme épuré de tout accessoires détournant l’attention. De plus, nous utiliserons des couleurs de ton pastel pour éviter de fatiguer le regard de l’utilisateur.
 
 Cette contrainte est satisfaisable en s’inspirant de nombreux designs qui ont déjà été développés et publiés sur le web. On s’appuiera notamment sur l’article \cite{lente2014scenariser} qui étudie la \textit{“collaboration entre Ergonomie, Design et Ingénierie”}.
 
 \subsubsection{Test}
 
-Utilisation de l’application par plusieurs sujet sans donner d’indiction sur son fonctionnement afin d’observer si le design lèse l'expérience de l’utilisateur.
+Utilisation de l’application par plusieurs sujets sans donner d’indication sur son fonctionnement afin d’observer si le design affecte négativement l'expérience de l’utilisateur.
 
 \subsubsection{Priorité : \textit{basse}}
 

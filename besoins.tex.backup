@@ -2,10 +2,11 @@
 
 \section{Fonctionnement de l'application}
 
+Nous posons d'abord les bases de l'application, c'est à dire son foctionnement global, tous les états dans lesquels il sera possible de se trouver, comment y arriver et comment en sortir.
 
  \begin{figure}[!ht]
  \begin{center}
-  \fbox{\includegraphics[width=10cm,angle=90]{besoins/etattrans.png}}
+  \fbox{\includegraphics[width=17cm]{besoins/etattrans.png}}
   \caption{Diagramme d'états - Fonctionnement de l'application}
   \label{etattrans}
  \end{center}
@@ -17,7 +18,7 @@
 
  \begin{figure}[!ht]
  \begin{center}
-  \fbox{\includegraphics[width=10cm]{besoins/sequence.png}}
+  \fbox{\includegraphics[width=8cm]{besoins/sequence.png}}
   \caption{Diagramme de séquences - Fonctionnement de l’application utilisateur mode Questions/Réponses}
   \label{sequence}
  \end{center}
@@ -38,60 +39,63 @@ Les besoins sont classés par priorité dans leur ordre d'apparition. De plus, c
 
 \section{Besoins fonctionnels}\label{besoins_fonctionnels}
 
-\subsection{Application multi-Plateforme: Utiliser l’application sur les systèmes d’exploitation principaux et récents}\label{systems}
+\subsection{Utiliser l’application sur les systèmes d’exploitation principaux et récents}\label{systems}
 
 \subsubsection{Description}
 
-L’application sera utilisé sur les principaux systèmes d’exploitations actuels (\textit{Microsoft Windows 7}, \textit{Ubuntu 12.04}, \textit{Debian 6.0}, \textit{MAC OS X 10.9}) et les versions plus récentes de ces systèmes d’exploitation.
+Etant donné que notre client sera amené à transporter l’application, il faut que celle-ci puisse fonctionner sur différents environnements à savoir \textit{Microsoft Windows 7}, \textit{Ubuntu 12.04}, \textit{Debian 6.0}, \textit{MAC OS X 10.9} et les versions plus récentes de ces systèmes d’exploitation.
 L’application est susceptible de fonctionner sur d’autres systèmes d’exploitation (par compatibilité de noyau) sans toutefois de garantie de ce fonctionnement.
 
 \subsubsection{Faisabilité}
 
-Cette condition est remplie en utilisant une application JavaFX, supportée par les environnements possédant un java à jours.
+Cette condition est remplie en utilisant une application \textit{JavaFX}, supportée par les environnements possédant un environnement \textit{Java} à jour (la version 8 étant nécessaire pour le fonctionnement optimal de \textit{JavaFX}).
 
 \subsubsection{Contingence}
 
-Le risque principal est que le client travaille sur une machine ne possédant pas un java à jours. Pour pallier à cette problématique une note de fonctionnement est disponible avec notre application.
+Le risque principal serait que le client travaille sur une machine ne possédant pas un environnement \textit{Java} à jour. Pour pallier à ce problème, nous avons proposerons un script d'installation du dernier environnement \textit{Java}.
 
 \subsubsection{Test}
 
-Pour assurer la réponse à ce besoin nous avons lancé l’application sur les différents systèmes d’exploitations et observé si des problèmes apparaissaient.
+Lancer l'application dans chacun des systèmes d’exploitation cités précédemment. L'application devra fonctionner sur chacun de ces systèmes d'exploitation, sans quoi, la contrainte ne serait pas remplie.
 
 \subsubsection{Priorité : \textit{Critique}}
 
-\subsection{Application nomade}\label{nomadite}
+\subsection{Rendre l'application nomade}\label{nomadite}
 
 \subsubsection{Description}
 
-Pour effectuer ses études, notre client ne souhaite pas transporter sa machine sur les lieux où elles se déroulent. Pour cela, il faut donc avoir une application transportable sur un périphérique externe de type clef USB ou SSD externe.
+Pour effectuer ses études, notre client ne souhaite pas transporter sa machine sur les lieux où elles se déroulent. Pour cela, il faut donc avoir une application transportable sur un périphérique externe de type clef USB.
 
 \subsubsection{Faisabilité}
 
-Pour remplir cette condition, tous les composants de l’application seront stockés sur une clef USB ou un disque dur externe afin que le client puisse l'utiliser sur n’importe quel ordinateur.
+Pour remplir cette condition, tous les composants de l’application compilée seront stockés sur une clef USB ou un disque dur externe, afin que le client puisse l'utiliser sur n’importe quel ordinateur.
 
 \subsubsection{Contingence}
 
-Le risque serait que le formatage de la partition de la clef USB ne soit pas pris en compte par le système d’exploitation de la machine (par exemple le formatage \textit{NTFS} de \textit{Windows} n’est pas reconnu par le système \textit{Mac OS}, le formatage \textit{EXT4} du système \textit{Ubuntu} n’est pas reconnu par les systèmes d’exploitation \textit{Windows}). Pour éviter cela, la clef devra être formatée en \textit{FAT32} qui est un formatage de partition reconnu par les systèmes d’exploitation cités dans la section \ref{systems}.
+Le risque serait que le formatage de la partition de la clef USB ne soit pas pris en compte par le système d’exploitation de la machine (par exemple le formatage \textit{NTFS} de \textit{Windows} est reconnu par le système \textit{Mac OS}, mais accessible en lecture seule, le formatage \textit{EXT4} du système \textit{Ubuntu} n’est pas reconnu par les systèmes d’exploitation \textit{Windows}). Pour éviter cela, la clef devra être formatée en \textit{FAT32}, qui est un formatage de partition reconnu par les systèmes d’exploitation cités dans la section \ref{systems}.
 
 \subsubsection{Test}
 
-Faire fonctionner l’application à partir d’une clef USB (ou disque dur externe selon le support qui sera choisi) sur les différents systèmes d’exploitations cités précédemment.
+Faire fonctionner l’application à partir d’une clef USB (ou disque dur externe selon le support qui sera choisi) sur les différents systèmes d’exploitations cités précédemment. L'application devra fonctionner en \textit{standalone}, sauf dans le cas d'un environnement \textit{Java} non à jour, comme précisé en \ref{systems}.
 
 \subsubsection{Priorité : \textit{Critique}}
 
 \subsection{Ajouter du contenu multimédia et des questions}
 
 \subsubsection{Description}
-Pour avoir un aspect évolutif et personnalisable ,le client doit pouvoir enregistrer dans la base de données, de nouvelles vidéos et de nouveaux sons afin d’augmenter l’efficience de ses tests. De plus, pour améliorer ses recherches, notre client pourra ajouter des questions avec leurs correspondances audios et vidéos.
-Tout ceci pouvant être fais en ligne de commande linux.
+
+Le client doit pouvoir enregistrer dans la base de données, de nouvelles vidéos et de nouveaux sons afin d’augmenter l’efficience de ses tests. De plus, pour améliorer ses recherches, notre client pourra ajouter des questions avec leurs correspondances audios et vidéos.
+Cet ajout de médias devra être possible en ligne de commande sous un système \textit{Unix}, en passant un fichier texte dans un paramètre.
 
 \subsubsection{Faisabilité}
 
 Pour faciliter cette gestion, nous utiliserons une base de données. Les données seront plus facilement accessibles lors de l’utilisation de l’application.
+Puis, pour réaliser l'administration en ligne de commande, une application annexe sera développée. Cette application sera en \textit{Java} et disposera des arguments nécessaires pour ajouter et lister les médias dans la base de données.
 
 \subsubsection{Test}
 
-Pour remplir cette nécessité nous avons ajouter du contenu multimédia (audio et video) et une question puis lister tout le contenu de la base de données pour voir si l’ajout à été pris en compte.
+Ajouter du contenu multimédia (audio et video) et une question puis lister tout le contenu de la base de données pour voir si l’ajout à été pris en compte.
+Une réussie du test se concluera par une base de données remplie via l'application annexe, et une application graphique qui fonctionnera (qui accèdera au médias et les affichera).
 
 \subsubsection{Priorité : \textit{Moyenne}}
 
@@ -99,7 +103,7 @@ Pour remplir cette nécessité nous avons ajouter du contenu multimédia (audio 
 
 \subsubsection{Description}
 
-Le contenu multimédia de notre client étant composé de différents formats vidéos et audios ainsi que de codecs specifiques, l’application doit donc pouvoir assurer une lecture optimale.
+Le contenu multimédia de notre client étant composé de différents formats vidéos et audios, utilisants des codecs variés, l’application doit pouvoir assurer une lecture optimale de ces médias.
 
 Effectivement, c’est un obstacle que l’on rencontre dès que l’on commence à programmer dans le domaine de la vidéo et de l’audio (des références étudiant certaines de ces contraintes : \cite{ghanbari1999video} et \cite{he2013introduction}).
 Le fond du problème est l’utilisation de Codecs (vidéo et audio) pour lire les différents types de fichiers, qui sont encodés selon différentes normes.
@@ -233,25 +237,4 @@ Nous avons établi un calendrier de projet qui présente le déroulement génér
    \fbox{\includegraphics[width=18cm,angle=90]{besoins/gantt.png}}
    \caption{\label{gantt} Gantt - Calendrier du projet}
  \end{center}  
-\end{figure}
-
-%tableau à taille fixée sur certaines colonnes (param sur la ligne \begin{tabularx}, voir wiki pour plus d'info sur la syntaxe
-\begin{figure}[!h]
-\begin{center}
-\begin{tabularx}{17cm}{|c|p{6cm}|X|}
- \hline
- Priorité & Nom & Raison\\
- \hline
- 1 & Tache 1 & Doit être vérifié en premier car sinon [...] \tabularnewline
- 2 & Tache 2 & On doit pouvoir [...] \tabularnewline
- 3 & Tache 3 & Comme les principales fonctionnalités permettant de tester sont opérationnelles, nous pouvons passer à cette tâche. \tabularnewline
- 4 & Tache 4 & Parce que [...] \tabularnewline
- 5 & Tache 5 & La tache 5 fait partie des principales [...]. \tabularnewline
- 6 & Tache 6 & Dernière fonctionnalité essentielle à mettre en place. \tabularnewline
- 7 & Tache 7 & Non-essentiel, mais apporterait un plus au projet. \tabularnewline
- 8 & Tache 8 & Non-essentiel, mais apporterait un plus au projet. \tabularnewline
- \hline
-\end{tabularx}
-\end{center}
-\caption{Tableau récapitulatif des tâches}
 \end{figure}
