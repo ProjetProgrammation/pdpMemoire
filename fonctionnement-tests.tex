@@ -4,11 +4,30 @@ Dans cette partie nous chercherons à décrire dans un premier temps les fonctio
 
 \section{Fonctionnement}
 
+Afin d'introduire le fonctionnement des deux modules de l'application, nous avons réalisé deux diagrammes de séquences décrivant le fonctionnement global du programme :
+
+\begin{figure}[!ht]
+\begin{center}
+  \fbox{\includegraphics[width=8cm]{./fonctionnement_tests/sequence.png}}
+  \caption{Fonctionnement - Fonctionnement interface graphique}
+  \label{tree} 
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+  \fbox{\includegraphics[width=8cm]{./fonctionnement_tests/sequenceAdmin.png}}
+  \caption{Fonctionnement - Fonctionnement administration}
+  \label{tree} 
+\end{center}
+\end{figure}
+
+\newpage
 L'application est séparée en deux modules, qui sont le module de test prosodique contenant l'interface graphique, et un module d'administration utilisable en ligne de commande. Ces deux modules partagent la même BDD. Ils sont donc, une fois compilés et compressés dans des \textit{jar}, situés dans le même répertoire, pour accéder à une BDD commune. Afin de garder une organisation des fichiers qui seront créés ou importés, nous avons codé un script créant toute l'organisation des fichiers de l'application lors de sa première utilisation. Ce script crée les répertoires avec l'arborescence suivante :
 
 \begin{figure}[!ht]
 \begin{center}
-  \fbox{\includegraphics[width=6cm]{./fonctionnement_tests/tree.png}}
+  \fbox{\includegraphics[width=5cm]{./fonctionnement_tests/tree.png}}
   \caption{Fonctionnement - Organisation répertoires}
   \label{tree} 
 \end{center}
@@ -21,7 +40,13 @@ Lorsque l'on lance l'application de test prosodique, on exécute l'interface gra
 \subsection{Interface Graphique (GUI)}\label{GUI}
 
 Tout d'abord, nous allons expliquer notre choix de technologie, qui s'est orienté vers le \textit{JavaFX}.
-Nous pensions dans un premier temps développer l'application en \textit{Java} et générer des pages \textit{HTML} pour l'interface graphique. Puis après des recherches, nous avons découvert le \textit{JavaFX}, qui nous permettait de créer une interface graphique, mais à l'instar de la libraire \textit{Swing}, complètement personnalisable. Nous avons alors choisi ce langage afin d'avoir une application 100\% \textit{Java}.
+Nous pensions dans un premier temps développer l'application en deux étapes séparées : une première partie en \textit{Java} pour le côté traitement, puis une partie en \textit{Java EE} afin de pouvoir générer des pages \textit{HTML} pour l'interface graphique, et ainsi pouvoir complètement gérer l'apparence de notre application. 
+
+Ensuite, après quelques recherches sur internet, nous avons découvert l'existance du \textit{JavaFX}.
+Cette librairie de \textit{Java}, est vue par ses créateurs comme l'évolution de \textit{Swing}.
+Elle en est une évolution du fait du total contrôle que l'on a sur l'apparence de l'interface créée : contrairement à \textit{Swing}, où l'on utilise des composants inaltérables, tous les éléments sont personnalisables (boutons, arrière plan, police, organisation et taille des éléments).
+Cette librairie était donc adaptée, car nous avions comme contrainte de développer une application ergonomique, ce qui n'est pas le cas d'une application développée avec \textit{Swing}, très limitée graphiquement.\\
+\\
 
 
 La méthode \textit{main} de Start.java est appelée lors du démarrage de l'application. Cette méthode fait créé une instance de UserGUI, la première page de l'application qui s'affiche.
@@ -154,7 +179,12 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
  
 \subsection{Administration}\label{fonction_admi}
 
-L'administration est une application qui fonctionne indépendamment de l'application graphique. Elle est lancée en ligne de commande (\textit{java -jar <fichier.jar> <paramètre 0> <paramètre 1> <paramètre 2>}), les paramètres correspondants aux différentes fonctionnalités. Nous allons décrire le fonctionnement de cette application en partant des choix de paramètres possibles, récapitulés ci-dessous :
+L'administration est une application qui fonctionne indépendamment de l'application graphique.
+Elle est lancée en ligne de commande (\textit{java -jar <fichier.jar> <paramètre 0> <paramètre 1> <paramètre 2>}), les paramètres correspondants aux différentes fonctionnalités.
+Nous avons décidé de créer nos propres arguments, au lieu de laisser la possibilité à l'administrateur de lancer directement des requêtes \textit{SQL}. Ce choiw a été fait afin d'éviter toute corruption involontaire de la BDD. Dans notre application, seuls les fichiers adaptés, avec les noms adaptés peuvent être ajoutés.
+Ce besoin de contrôle de la nommenclature est nécessaire, car nous extrayons l'ensemble des informations sur les médias (langue, format, titre du média) depuis leur nom.
+
+Nous allons décrire le fonctionnement de cette application en partant des choix de paramètres possibles, récapitulés ci-dessous :
 
 \begin{figure}[!ht]
 \begin{center}
@@ -180,16 +210,7 @@ L'administration est une application qui fonctionne indépendamment de l'applica
 \end{figure}
 
 
-\subsubsection{Paramètres et leurs actions}
-
-Ce paramètre correspont à quel type d'action on veut effectuer :
-\begin{itemize}
- \item add : ajouter du contenu
- \item rm  : supprimer du contenu
- \item ls  : afficher du contenu
-\end{itemize}
-
-\paragraph{add}
+\subsubsection{Paramètre ``add''}
 
 L'ajout de contenu se fait par le biais d'un fichier (sans extension) contenant du simple texte.
 Ce texte doit être formatté selon les règles suivantes :
@@ -227,13 +248,13 @@ Ce texte doit être formatté selon les règles suivantes :
 
 Ces ajouts font appel à une méthode d'ajout de médias, sachant de quel type de média il s'agit. Cette méthode rempli la BDD après avoir appelé une méthode d'extraction des données du fichier passé en paramètre à l'aide de \textit{regex}.
 
-\paragraph{rm}
+\subsubsection{Paramètre ``rm''}
 
 La suppression de contenu se fait d'une manière similaire à l'ajout : une méthode est chargée de la suppression en BDD des médias, faisant elle-même appel à la fonction d'extraction des données, pour identifier les tuples à supprimer. Ensuite, une fonction gestion de l'intégrité de la BDD vérifie que ces médias ne sont pas liés à une question encore existante.
 
 Seule la suppression de question diffère de l'ajout : seul le nom des questions doit être entré dans le fichier passé en paramètre. Le fonctionnement reste ensuite identique à la suppression de vidéos ou d'audios.
 
-\paragraph{ls}
+\subsubsection{Paramètre ``ls''}
 
 Comme dans un terminal \textit{Shell}, le paramètre \textbf{ls} permet de lister le contenu de la BDD. Pour afficher ce contenu, une méthode fait appel à la méthode de listage de toute une table de la BDD dans la classe \textit{DataBase}, du package \textit{BDD} de l'application graphique.
 
@@ -261,7 +282,7 @@ Afin de contrôler l'efficacité de nos tests, nous avons utilisé un plugin dis
 
 \begin{figure}[!ht]
 \begin{center}
-  \fbox{\includegraphics[width=15cm]{./fonctionnement_tests/CoCoJava.png}}
+  \fbox{\includegraphics[width=12cm]{./fonctionnement_tests/CoCoJava.png}}
   \caption{Tests - Recouvrement des tests}
   \label{cocojava} 
 \end{center}
@@ -273,11 +294,14 @@ Afin de contrôler l'efficacité de nos tests, nous avons utilisé un plugin dis
 Afin de réaliser les tests de performance, nous avons simplement utilisé un plugin de \textit{Netbeans} (\textsc{Figure} \ref{perf}). Ce plugin permet de mesurer les performance en temps CPU.
 
 Sachant déjà que nous avions un problème de performance pendant le chargement de la page \textit{TestGUI} (voir \ref{GUI}), ce test nous a permis d'identifier le code fautif.
-Ainsi, l'accès à la base de données a été mis en cause. La méthode de connexion étant seulement gérée par le driver \textit{SQLite-jdbc}, nous pouvons nous affranchir de tout problème de lenteur dans notre code actuel. Cependant, ce point permet d'envisager une future amélioration à ce niveau là, en déployant un SGBDR plus efficace pour notre utilisation.
+Ainsi, l'accès à la base de données a été mise en cause. La méthode de connexion étant seulement gérée par le driver \textit{SQLite-jdbc}, nous pouvons donc en conclure que notre gestion des accès à la BDD n'est pas optimisé à son maximum.
+Une piste d'amélioration serait de modifier le moment d'accès à la base de données. Il serait facilement envisageable de cloner la totalité de la BDD au lancement de l'application avec le pattern \textit{DAO (Data Access Object}. Ce pattern permet de créer une séparation entre la BDD et l'application. L'application n'accède pas directement à la base de données, mais à une réplique formée d'objets.
+Ainsi, la chargement de toute la BDD étant fait au lancement de l'application, plus aucune latence ne se ferait ressentir, vu que les accès en BDD n'existeraient plus, pour laisser la place à l'accès à des objets, beaucoup plus rapide.
+De plus, notre architecture récupérant les informations de la BDD, en ayant une table correspondant à un type d'objet, facilite la transition vers un tel pattern.
 
 \begin{figure}[!ht]
 \begin{center}
-  \fbox{\includegraphics[width=15cm]{./fonctionnement_tests/performance.png}}
+  \fbox{\includegraphics[width=12cm]{./fonctionnement_tests/performance.png}}
   \caption{Tests - Performances}
   \label{perf} 
 \end{center}
