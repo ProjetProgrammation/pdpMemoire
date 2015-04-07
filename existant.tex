@@ -34,24 +34,23 @@ PSOLA (Pitch Synchronous Overlap and Add) est une technique de traitement de sig
 
 Par rapport à un certain discours, les expressions faciales et particulièrement buccales peuvent être régies par plusieurs règles de synchronisation afin de pouvoir par exemple améliorer un discours homme-machine \cite{beskow1995rule} .
 
-Le document \cite{matsumoto1992american} est utile dans le sens qu'il porte sur l'étude de la prosodie faciale, et ce afin de pouvoir détecter l'ethnie du protagoniste, ce qui nous est utile car le projet porte sur trois langues : le français, l'anglais (américain) et le japonais.
+La prosodie faciale permet, en outre, d'aider à la détection ethnique du protagoniste, qui est un facteur intéressant pour notre projet car il porte effectivement sur trois langues : le français, l'anglais (américain) et le japonais\cite{matsumoto1992american}.
 
 
 \section{État de l'art}\label{state_of_the_art}
 
-L'article \cite{rouas2006identification} nous donne une ligne directrice pour tout ce qui touche la reconnaissance des différents dialectes arabes. En d'autres termes, malgré une proximité géographique et linguistique, la prosodie permet la différenciation.
-L'article de la revue en ligne Alsic \cite{10.4000/alsic.332} nous apporte un point sur l'état actuel de l'art en matière de logiciel pour l'apprentissage de la prosodie, ce qui est proche de ce que l'on cherche à développer.
+La prosodie permet, par exemple d'aider, à la reconnaissance des différents dialectes arabes. En d'autres termes, malgré une proximité géographique et linguistique, la prosodie permet la différenciation \cite{rouas2006identification}.
+
+L'apprentissage de la prosodie, n'est pas un desir extremement nouveau, ainsi nous nous somme documenté sur l'état actuel de l'art en matière de logiciel pour l'apprentissage de la prosodie, et avont trouvé certains documents proche de ce que l'on cherche à développer \cite{10.4000/alsic.332}. 
 
 \section{Programmation avec du contenu vidéo}
 
-Les articles \cite{ghanbari1999video} et \cite{he2013introduction} nous ont permis de mieux comprendre le concept d'encodage des vidéos et l'utilisation de \textit{Codecs} pour pouvoir décoder ces vidéos afin de les lire.
-
+Une vidéo, ne se réduit pas seulement à un format, elle se compose également des \textit{Codecs}, ces dispositifs permettent la compression/decompression d'un signal numérique. Ces \textit{Codecs} sont des mecanismisme importants lorsque l'on veut faire du traitement sur une vidéo car c'est cette technique qui permet l'encodage et le décodage de fichier afin de pouvoir les lire \cite{ghanbari1999video} \cite{he2013introduction}.
 \section{Ergonomie}
-
-L'article \cite{lente2014scenariser} est une étude sur la “collaboration entre Ergonomie, Design et Ingénierie”, qui nous offre une façon de procéder afin de réaliser une ergonomie des plus efficace.
+Pour désigner notre application, tout ne peut se faire à notre guise, des règles et des principes existent afin de mêler harmonieusement ergonomie et design \cite{lente2014scenariser}.
 
 \section{Base de données}
 
 Durant ce projet, il a fallu trouver le système de base de données le plus adapté à nos besoins. Pour ce faire, nous nous sommes appuyés sur l'article \cite{strauchnosql}, disséquant l'architecture \textit{NoSQL} (Not Only SQL).
-Nous tournant finalement vers le \textit{SGBDR} (Système de Gestion de Base de Données Relationnelles) \textit{SQLite}, nous nous sommes informés sur l'utilisation et les finalités de ce logiciel avec le livre \cite{kreibich2010using}.
+Nous tournant finalement vers le \textit{SGBDR} (Système de Gestion de Base de Données Relationnelles) \textit{SQLite}, nous nous sommes informés sur l'utilisation et les finalités de ce logiciel \cite{kreibich2010using}.
 
