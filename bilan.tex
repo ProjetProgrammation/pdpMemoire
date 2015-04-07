@@ -1,24 +1,24 @@
 \chapter{Bilan}
 
 
-L'UE de projet de programmation a été important lors de cette première année de master. En effet, elle nous a donné la possibilité de mettre en application les connaissances accumulées durant nos années d'études précédente dans l'élaboration d'un projet. Cependant l'étude de l'existant ainsi que la documentation ont été des parties nouvelles pour nous tous.
+L'UE de projet de programmation a été importante lors de cette première année de master. En effet, elle nous a donné la possibilité de mettre en application les connaissances accumulées durant nos années d'études précédentes dans l'élaboration d'un projet. Cependant, l'étude de l'existant ainsi que la documentation ont été des parties nouvelles pour nous tous.
 
 Ce projet nous permet d'avoir une ligne supplémentaire dans nos CV respectifs. Plus qu'une mise en situation, c'est, en soit, une expérience professionnelle, puisque nous avions un client à satisfaire.
 
-On peut aussi souligner l'expérience de travail en équipe, qui induit une bonne répartition des tâches, ainsi que l'utilisation d'une gestionnaire de version (dans notre cas, \textit{Github}).
+Nous pouvons aussi souligner l'expérience de travail en équipe qui induit une bonne répartition des tâches ainsi que l'utilisation d'une gestionnaire de version (dans notre cas, \textit{Github}).
 
 Cependant, notre application n'est pas optimale et plusieurs poursuites de projet peuvent être envisagées :
 
 \begin{itemize}
- \item La sauvegarde et la reprise des test en cas de crash de l'application serait une poursuite à mettre en place dans l'avenir. En effet, notre application extrait les données utilisateur ainsi que ses réponses en fin de test. Malheureusement à cause de ce système, un crash ne permet pas d'avoir une sauvegarde préalable. La solution serait d'écrire dans le fichier texte à chaque validation de réponses. Ensuite en cas d'arrêt non voulu de l'application, un algorithme serait mis en place à partir du fichier créer qui permettrait de retrouver le nombre de question restante.
+ \item La sauvegarde et la reprise des tests en cas de crash de l'application serait une poursuite à mettre en place dans l'avenir. En effet, notre application extrait les données utilisateur ainsi que ses réponses en fin de test. Malheureusement à cause de ce système, un crash ne permet pas d'avoir une sauvegarde préalable. La solution serait d'écrire dans le fichier texte à chaque validation de réponses. Ensuite en cas d'arrêt non voulu de l'application, un algorithme serait mis en place à partir du fichier créé qui permettrait de retrouver le nombre de questions restantes.
  \item 
 \end{itemize}
 
 
-L'ajout de la synchronisation audio-vidéo : nos recherches nous ont mené sur deux pistes différentes. La première était l'utilisation de la bibliothèque Xuggle\footnote{http://www.xuggle.com/xuggler/}. Elle utilise les bibliothèques FFmpeg permettant d'encoder, de décoder des fichiers audio et vidéo.
+L'ajout de la synchronisation audio-vidéo : nos recherches nous ont menés sur deux pistes différentes. La première était l'utilisation de la bibliothèque Xuggle\footnote{http://www.xuggle.com/xuggler/}. Elle utilise les bibliothèques FFmpeg permettant d'encoder, de décoder des fichiers audio et vidéo.
 Son utilisation est cependant inappropriée du fait que le projet ait été abandonné et rendant par la même occasion la synchronisation mal venue. En effet aucun support n'est disponible via cette bibliothèque si besoin est.
 
-Par la suite nos recherches nous ont amené à étudier la bibliothèque \textit{Opencv}\footnote{http://opencv.org/}. Elle est la référence dans le domaine du traitement d'images.
+Par la suite, nos recherches nous ont amené à étudier la bibliothèque \textit{Opencv}\footnote{http://opencv.org/}. Elle est la référence dans le domaine du traitement d'images.
 
 Comprenant de nombreuses fonctionnalités, elle possède celles que nous recherchions, c'est à dire la lecture, l'écriture et l'affichage d’une vidéo. Elle nous permettrait notamment la modification du nombre d'images par seconde de notre fichier vidéo pour pouvoir avoir une bonne synchronisation, en prenant pour référence notre fichier audio, et idéalement, les séquences correspondantes de phonèmes.
 
@@ -33,7 +33,7 @@ Vérification lecture et ouverture  fichier Audio;
 
 Création du fichier de sortie mix;
 Récupération des Streams des fichiers audio et video;
-Récupération de la StreamAudio pour le fichier audio et récuperation de la Stream Video pour le fichier vidéo;
+Récupération de la StreamAudio pour le fichier audio et récuperation de la StreamVideo pour le fichier vidéo;
 
 Si temps_StreamAudio < temps_streamVideo alors
   On augmente frame_rate_StreamVideo jusqu'à temps_StreamAudio = temps_streamVideo;
@@ -76,7 +76,7 @@ FinSi;
 
 \end{verbnobox}
 
-\textbf{Stream} : un ensemble de données accessible dans le temps. Les éléments d'un stream sont appelés \textit{Frame} et chaque \textit{Frame} est encodé par une sorte différente de codec.
+\textbf{Stream} : un ensemble de données accessibles dans le temps. Les éléments d'un stream sont appelés \textit{Frame} et chaque \textit{Frame} est encodée par une sorte différente de codec.
 
 
-\textbf{Packet} : partition de donnée qui contient des bits. Ces bits sont décodés dans des \textit{Frames} pour que finalement nous puissions les manipuler.
+\textbf{Packet} : partition de données qui contient des bits. Ces bits sont décodés dans des \textit{Frames} pour que finalement nous puissions les manipuler.
