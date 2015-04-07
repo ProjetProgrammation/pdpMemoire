@@ -8,20 +8,18 @@
 \end{center}
 \end{figure}
 
-L'architecture \textbf{M}odele-\textbf{V}ue-\textbf{C}ontroleur (\textbf{MVC}) permettant ``la séparation des éléments principaux d'un système d'intéraction d'une couche présentation''\footnote{Citation du cours magistral de PdP de M.Narbel} nous semblait le pattern le mieux adapté au développement de notre application basée sur les liens base de données/interface graphique. 
+L'architecture \textbf{M}odele-\textbf{V}ue-\textbf{C}ontroleur (\textbf{MVC}) permettant ``la séparation des éléments principaux d'un système d'intéraction d'une couche présentation'' \footnote{Citation du cours magistral de PdP de M.Narbel} nous semblait le pattern le mieux adapté au développement de notre application basée sur les liens base de données/interface graphique. 
 
 De plus, grâce à ce \textit{design pattern}, nous avons pu répartir les rôles de chacun afin de produire un travail efficace.
 
-\section{Application graphique, contenu des packages}
+\section{Application principale}
 
 Notre architecture est structuré en plusieurs packages. Ils ont été créés avec comme but de compartimenter notre architecture en fonction des besoins renseignés précédemment. Chaque package regroupe un certain nombre de classes, chacune possédant une fonction bien précise.
 
 Dans cette section, nous allons décrire le besoin que nous avons voulu satisfaire avec chaque package et le rôle de chacune de leurs classes. Pour suivre la logique MVC, nous allons structurer la description selon ce même pattern.
 
-\subsection{Modèle}\label{modele}
 
-
-\subsubsection{BDD}
+\subsection{BDD}
 
 Ce package concerne tout ce qui se rapproche de la base de données. Ainsi, elle possède tous les types d'objets que nous allons insérer et sélectionner :
 \begin{itemize}
@@ -33,12 +31,10 @@ Ce package concerne tout ce qui se rapproche de la base de données. Ainsi, elle
  \item \textit{Language}
  \item \textit{Question}
 \end{itemize}
-
-
 Ces types d'objet intéragissent avec la base de données via la classe \textit{Database}.
 
 
-\paragraph{Classe DataBase}
+\subsubsection{Classe DataBase}
 
 Cette classe contient toutes les intéractions entre les objets et la base de données (on notera BDD dès à présent). Elle permet de :
 
@@ -50,85 +46,85 @@ Cette classe contient toutes les intéractions entre les objets et la base de do
  \item consulter la BDD
 \end{itemize}
 
+Cette centralisation permet d'optimiser l'accès à la BDD, faciliter la gestion de conflits et gérer les échanges de médias tout au long de l'application.
 
-Cette centralisation permet d'optimiser l'accès à la BDD, faciliter la gestion de conlits et gérer les échanges de médias à partir du même endroit.
+\subsubsection{Classes Media, Audio et Video}
 
-\paragraph{Classes Media, Audio et Video}
+Ces trois classes sont unies : les classes \textit{Audio} et \textit{Video} héritent de la classe abstraite \textit{Media}. Cette dernière regroupe les méthodes communes aux classes héritées. Ce pattern nous est utile vu qu'il nous permet de fusionner un code redondant. Ces classes Audio et Video créent des objets par rapport aux champs de la base de données. Ce choix a été fait puisque la manipulation d'objet est plus simple que de manipuler et de réutiliser directement à partir de la base de données.
 
-Ces trois classes sont unies : les classes \textit{Audio} et \textit{Video} héritent de la classe abstraite \textit{Media}. Cette dernière regroupe les méthodes communes aux classes héritées. Celles-ci sont importantes dans notre application puisqu'elles créent les objets en fonction du contenu de la base de données. Ils serviront pour la lecture des médias dans notre application grâce aux \textit{file\_path} (chemin vers les fichiers sur le disque) renseignés dans la base données.
+\subsubsection{Classe Question, Language}
 
-\paragraph{Classe Question, Language}
+Ces classes créent des objets correspondants à une question et à une langue issues de la base de données.
+Les objets \textit{Question} ne sont uniquement utiles au sujet par le fait que c'est à cette question qu'il doit sélectionner la vidéo et l'audio qui semblent répondre au mieux à celle-ci.
+Les objets \textit{Language} nous sont utiles puisque dans notre appication, chaque sélection audio, vidéo et question sont faites par rapport à l'id de la langue.
 
-Ces classes créent des objets correspondants à une question et à une langue. Les langues nous permettrons de sélectionner les questions, audios et vidéos qui seront proposés à l'utilisateur de l'application.
+\subsection{Controller}
 
-Il n'était pas forcemment nécessaire de créer une classe pour la langue, mais nous avons trouvé ceci utile, au cas où notre client souhaite par la suite traiter de nouvelles langues.
+Dans une architecture MVC, le controller sert de lien entre la partie modèle et la partie vue. Il va chercher les différents objets du modèle utile à la vue et modifie, si besoin, les objets que la vue a manipulé
 
-
-\subsection{Contrôleur}\label{archi_controller}
-
-
-\subsubsection{Controller}
-
-\paragraph{ControllerDatabase}
+\subsubsection{ControllerDatabase}
 
 Cette classe fait le lien entre le modèle et la vue, c'est elle qui récupère les méthodes du modèle, pour les utiliser dans la vue, et inversement. Ses méthodes n'affectent par contre pas directement la vue, car elles sont utilisées par les deux autres classes du packages pour générer des objets de média voulus.
+Cette classe est importante vu qu'elle est le lien vers la classe \textit{Database}. A chaque fois qu'un objet souhaite accéder aux données, cette classe est là pour ``abstraire`` la classe Database. En effet, le sujet ne manipule pas directement celle-ci. Ce choix offre une sécurité supplémentaire sur la classe la plus importante de notre projet.
 
-\paragraph{SelectMedia}
+\subsubsection{SelectMedia}
 
-Réalise une sélection des médias nécessaires à l'initialisation des pages de la vue.
+Cette classe sélectionne les questions, les vidéos et les audios d'une manière aléatoire auxquels le sujet sera soumis lors du test.
 
-\paragraph{MediaSelected}
+\subsubsection{MediaSelected}
 
-Cette classe permet de récupérer les medias qui ont été sélectionnés par l'utilisateur, afin de pouvoir exporter ces données, via le package \textit{Result} (voir \ref{Archi_Results}).
-
-
-\subsubsection{Result}\label{Archi_Results}
-
-Ce package a pour fonction de regrouper les classes qui seront utiles pour l'étude de notre client. Il est constitué d'une classe qui rassemble les informations sur l'identité de l'utilisateur, d'une autre qui liste les réponses de celui-ci effectuées lors du test et enfin d'une classe qui extrait toutes ces données dans un fichier.
-
-\paragraph{Classe User}
-
-Cette classe se compose de différents attributs qui permettent de différencier chaque sujet, dans le but futur, de réaliser des statistiques.
-
-\paragraph{Classe Answer}
-
-Cette classe regoupe un trio d'objets composé de \textit{Question}, \textit{Audio} et \textit{Video} qui correspondent à la réponse audio et vidéo pour la question posée à l'utilisateur.
-
-\paragraph{Classe Extract}
-
-Cette classe sert à extraire, dans un fichier, la langue du test, les données de l'utilisateur ainsi que les réponses de celui-ci. Elle n'est composée que de méthodes statiques. En effet, on a trouvé inutile de créer un objet pour cela vu que la méthode principale n'est appelée qu'une unique fois dans l'application. Chaque extraction est effectuée lorsque l'utilisateur valide sa dernière réponse.
+Cette classe permet de récupérer les différentes informations nécessaire à l'exportation, via le package \textit{Result} (voir \ref{Archi_Results}). Ces informations sont multiples : les divers renseignements que l'utilisateur a entré, la langue du test, les questions soumises lors de celui-ci ainsi que les medias sélectionnés par l'utilisateur.
 
 
-\subsection{Vue}
+\subsection{GUI}
 
+Dans une architecture MVC, ce package correspond au terme vue. Il regroupe toutes les configurations et les fonctionnalités de l'interface graphique. Cette vue est composée d'une seule interface mais chaque classe modifie le contenu de celui-ci.
 
-\subsubsection{GUI}
-
-Ce package regroupe toutes les configurations et les fonctionnalités de l'interface graphique.
-
-\paragraph{Classe Start}
+\subsubsection{Classe Start}
 
 C'est à partir de cette classe que l'application se lance.
-Cette classe permet de créer et de charger l'environnement commun à toutes les fenêtres de l'interface graphique. C'est à dire :
+Cette classe permet de créer et de personnaliser l'interface graphique. C'est à dire :
 \begin{itemize}
  \item la taille de la fenêtre
- \item la feuille de style  et la police personnalisée
+ \item la feuille de style et la police personnalisée
  \item le titre de la fenêtre
 \end{itemize}
+On a décidé de mettre ces informations ici car ça permet de donner un rôle bien précis à chaque classe.
 
+\subsubsection{Classe UserGUI}
 
-\paragraph{Classe UserGUI}
+Cette classe remplit l'interface graphique des différents champs liés aux renseignements du sujet et à la sélection du langage du test. 
 
-Cette classe correspond à l'interface graphique où l'utilisateur renseigne son identité et choisit la langue du test.
+\subsubsection{Classe ChooseGUI}
 
-\paragraph{Classe ChooseGUI}
+Cette classe permet à l'utilisateur de choisir entre la session d'entrainement et la session test. Ces 2 sessions divergent par le nombre de questions soumis à l'utilisateur ainsi par le fait que seul la session test permet l'engistrement des données de l'utilisateur ainsi que les réponses de celui-ci.
 
-Cette classe permet à l'utilisateur de choisir entre la session d'entrainement et la session test.
+\subsubsection{Classe TestGUI, VideoGUI, SonGUI et QuestionGUI}
 
-\paragraph{Classe TestGUI}
+La classe \textit{TestGUI} est assez spéciale vu que plusieurs objets graphique gravitent autour d'elle. En effet, trois composants forment les diverses fonctionnalités de l'interface correspondant au test. Ce choix est motivé par le fait qu'elle se retrouve simplifié avec cette méthode. Cette classe ne contient que diverses fonctionnalités comme la progressbar et les 2 boutons permettant à l'interactions avec la suite du test.\\
+La classe \textit{QuestionGUI} n'est qu'un composant qui affiche la question.\\
+Les classes \textit{VideoGUI} et \textit{AudioGUI} affiche les médias sélectionnés pour le test ainsi qu'un boutons qui permet de prévisualiser les médias sélectionnés. La fonction prévisualisation lit la vidéo et l'audio via les classes \textit{MediaPlayer} et \textit{AudioPlayer} (voir \ref{players}).
+Avec cette organisation, chaque classe possède les fonctionnalités propre à lui même.
 
-Cette classe est assez spéciale vu que plusieurs objets graphique gravitent autour d'elle. En effet, on peut dire que l'interface qui en résulte est composé de quatre composants : l'audio, la vidéo, les question et les différents boutons pour le mix et la validation. La classe place tous ces objets dans le panel de la scene. 
+\subsubsection{Classe MediaPlayer et AudioPlayer}\label{players}
 
+Ces deux classes ont comme fonction de créer un player permettant de jouer une vidéo ou un audio. Ces classes instancient un composant spécifique à VLCJ. 
+
+\subsection{Result}\label{Archi_Results}
+
+Ce package a pour fonction de regrouper les classes qui seront utiles pour l'étude de notre client. Ce package est important vu que sans l'extraction des données, notre interface créée n'est absolument pas utile pour notre client étant donné qu'il analyse les résultats.
+
+\subsubsection{Classe User}
+
+Cette classe se compose de différents attributs qui permettent de différencier chaque sujet, dans le but futur, de réaliser des statistiques. Nous avons décidé de créer cette classe car c'est plus imple de manipuler un objet qu'un ensemble d'informations.
+
+\subsubsection{Classe Answer}
+
+Cette classe regoupe un trio d'objets composé de \textit{Question}, \textit{Audio} et \textit{Video}. Elle nous permet de bien effectuer la correspondance entre la question posée à l'utilisateur et le couple vidéo-audio sélectionné par celui-ci.
+
+\subsubsection{Classe Extract}
+
+Cette classe sert à extraire, dans un fichier, la langue du test, les données de l'utilisateur ainsi que les réponses de celui-ci. Elle n'est composée que de méthodes statiques. En effet, on a trouvé inutile de créer un objet pour cela vu que la méthode principale n'est appelée qu'une unique fois dans l'application. Chaque extraction est effectuée lorsque l'utilisateur valide la dernière réponse du test.
 
 \subsection{Tests}
 
@@ -138,11 +134,6 @@ Ce package regroupe l'ensemble des tests qui seront necessaires pour minimiser l
  \item Tests de performance avec les outils de \textit{Netbeans}
 \end{itemize}
 
-
-\subsection{ProjectProgAdmin}
-
-Ce package, qui en fait est une application à part entière, mais qui est liée à l'application de test prosodique, sert à réaliser l'administration de la base de données, en ligne de commande. L'utilisateur doit passer en paramètre ce qu'il désire faire et le fichier qui contient les médias à ajouter ou supprimer.
-Cette aplication est composée de la classe principale qui est exécutée et d'une classe \textit{Final} qui contient les foncions permettant d'intéragir avec la base de données.
 
 \section{Base de données}
 
@@ -157,23 +148,24 @@ La base de données est composée de quatre tables (voir \textsc{Figure} \ref{MC
 \end{figure}
 
 
-
 \section{Application tierce : administration}
 
-Nous avons décidé de complètement séparer l'administration de l'application de test prosodique. Ceci afin que l'administration se fasse beaucoup plus rapidement en ligne de commande depuis un système d'exploitation Linux.
-Cette application tierce est composée de deux classes :
+Nous avons décidé de complètement séparer l'administration de l'application de test prosodique. Ceci afin que l'administration se fasse beaucoup plus rapidement en ligne de commande depuis un système d'exploitation Linux. Contrairement à l'application principale, cette partie n'est pas multiplatforme. En effet, notre client est habitué à travailler sur ce système d'exploitation, il souhaitait pouvoir administrer l'application avec son outil habituel. De plus, l'utilisation de la ligne de commande nous a permis de créer une administration plus rapide qu'avec une interface dédiée. Cette avantage est important pour notre client qui ne souhaite pas avoir une administration fastidieuse.\\
 
-\begin{itemize}
- \item \textit{main.java} : contient toutes les appels aux méthodes d'administration de la base de données.
- \item \textit{AdminDatabase.java} : classe \textit{final} contient les méthodes \textit{static} d'administration de la base de données suivantes :
- \begin{itemize} 
-  \item Extraction de données d'un fichier (contenant les médias à ajouter ou supprimer)
-  \item Affichage dans le terminal du contenu de la base de données
-  \item Ajout d'une liste de médias/questions
-  \item Suppression d'une liste de médias/questions
-  \item Toute autre méthode nécessaire au fonctionnement des précédentes
- \end{itemize}
-\end{itemize}
+Cette application tierce sera lancée en ligne de commande en exécutant le fichier \textit{.jar} suivi des paramètres adéquats d'administration. La syntaxe de ces paramètres sera précisée dans la \textit{Javadoc} de l'application.\\
 
+Cette application tierce est composée de deux package ayant un rôle bien défini que nous allons expliquer ci-contre.
 
-Cette application tierce sera lancée en ligne de commande en exécutant le fichier \textit{.jar} suivi des paramètres adéquats d'administration. La syntaxe de ces paramètres sera précisée dans la \textit{Javadoc} de l'application.
+\subsection{Admin}
+
+Ce package est le socle de base de l'application administration.\\
+La classe \textit{ProjectProgAdmin} contient tous les appels aux méthodes d'administration de la base de données. C'est à partir de cette méthode que notre client renseignera dans la ligne de commande ses désirs pour manipuler la base de données.\\
+La classe \textit{AdminDatabase} contient les méthodes statiques d'administration de la base de données. Elle permet l'extraction des données d'un fichier contenant des médias ou des questions que l'on souhaite ajouter ou supprimer à la base de données ainsi que l'affichage dans le terminal du contenu de la base de données. C'est avec cette classe que le travail d'administration de notre client est simple et rapide.
+
+\subsection{Thumbnails}
+
+Ce package a pour but de générer les thumbnails de chaque vidéo. Ces aperçus sont composés d'une image et d'un gif issus des vidéos. Elle est composée de 4 classe distincte.\\
+La classe \textit{CreationThumbnail} appelles les différentes fonctions qui créent les deux types de thumbnails. Cette classe nous permet de bien appeler dans l'ordre voulu les différents objets. En effet, deux classes sont liés à la dernière.\\
+La classe \textit{Picture} est spéciale vu que c'est elle qui crée le thumbnail image mais aussi c'est elle qui appelle la fonction qui coupe la vidéo en différent "BufferedImage". Cette classe utilise les fonctionnalités du projet \textit{Xuggler}.\\
+La classe \textit{SliceFrame} découpe la vidéo passé en paramètre dans le constructeur de la classe précédente et crée une liste de "BufferedImage". Ces "images"sont sélectionnées selon la durée renseignée. Cette classe utilise aussi 
+La classe \texit{Gif} n'a pas été créée par nos soins. En effet, l'auteur Elliot Kroo a créé une classe qui facilite la création d'un gif. Nous avons décidé de prendre sa classe puisque ça nous permettait de nous concentrer sur un autre front. De plus, le résultat que nous avons eu avec ce système, a été satisfaisant.
