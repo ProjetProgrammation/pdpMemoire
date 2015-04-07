@@ -66,7 +66,7 @@ Ces classes créent des objets correspondants à une question et à une langue i
 Les objets \textit{Question} ne sont utiles au sujet que par le fait que c'est pour cette question qu'il doit sélectionner la vidéo et l'audio qui semblent être le plus adéquats.
 Les objets \textit{Language} nous sont utiles puisque dans notre appication, chaque sélection audio, vidéo et question sont faites par rapport à l'id de la langue.
 
-\subsection{Controller}
+\subsection{Controller}\label{archi_controller}
 
 Dans une architecture MVC, le controller sert de lien entre la partie modèle et la partie vue. Il va chercher les différents objets du modèle utile à la vue et modifie, si besoin, les objets que la vue a manipulé.
 
@@ -84,7 +84,7 @@ Cette classe sélectionne les questions, les vidéos et les audios d'une manièr
 Cette classe permet de récupérer les différentes informations nécessaire à l'exportation, via le package \textit{Result} (voir \ref{Archi_Results}). Ces informations sont multiples : les divers renseignements que l'utilisateur a entré, la langue du test, les questions soumises lors de celui-ci ainsi que les medias sélectionnés par l'utilisateur.
 
 
-\subsection{GUI}
+\subsection{GUI}\label{modele}
 
 Dans une architecture MVC, ce package correspond au terme "vue". Il regroupe toutes les configurations et les fonctionnalités de l'interface graphique. Cette vue est composée d'une seule interface mais chaque classe modifie le contenu de celui-ci.
 
