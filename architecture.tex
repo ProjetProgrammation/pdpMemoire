@@ -1,9 +1,17 @@
 \chapter{Architecture}
- 
+
 \begin{figure}[!h]
 \begin{center}
-  \fbox{\includegraphics[width=25.5cm,angle=90]{./architecture/architecture.png}}
-  \caption{UML - Architecture}
+  \fbox{\includegraphics[width=25.5cm,angle=90]{./architecture/UML-MA.png}}
+  \caption{UML - Architecture du modèle et de l'administration ainsi que des test}
+  \label{archi} 
+\end{center}
+\end{figure}
+
+\begin{figure}[!h]
+\begin{center}
+  \fbox{\includegraphics[width=25.5cm,angle=90]{./architecture/UML-VCU.png}}
+  \caption{UML - Architecture du controlleur, de la vue et du résultat ainsi que des errors}
   \label{archi} 
 \end{center}
 \end{figure}
@@ -167,5 +175,5 @@ La classe \textit{AdminDatabase} contient les méthodes statiques d'administrati
 Ce package a pour but de générer les thumbnails de chaque vidéo. Ces aperçus sont composés d'une image et d'un gif issus des vidéos. Elle est composée de 4 classe distincte.\\
 La classe \textit{CreationThumbnail} appelles les différentes fonctions qui créent les deux types de thumbnails. Cette classe nous permet de bien appeler dans l'ordre voulu les différents objets. En effet, deux classes sont liés à la dernière.\\
 La classe \textit{Picture} est spéciale vu que c'est elle qui crée le thumbnail image mais aussi c'est elle qui appelle la fonction qui coupe la vidéo en différent "BufferedImage". Cette classe utilise les fonctionnalités du projet \textit{Xuggler}.\\
-La classe \textit{SliceFrame} découpe la vidéo passé en paramètre dans le constructeur de la classe précédente et crée une liste de "BufferedImage". Ces "images"sont sélectionnées selon la durée renseignée. Cette classe utilise aussi 
+La classe \textit{SliceFrame} découpe la vidéo passé en paramètre dans le constructeur de la classe précédente et crée une liste de "BufferedImage". Ces "images"sont sélectionnées selon la durée renseignée.\\
 La classe \textit{Gif} n'a pas été créée par nos soins. En effet, l'auteur Elliot Kroo a créé une classe qui facilite la création d'un gif. Nous avons décidé de prendre sa classe puisque ça nous permettait de nous concentrer sur un autre front. De plus, le résultat que nous avons eu avec ce système, a été satisfaisant.
