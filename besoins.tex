@@ -39,11 +39,11 @@ Cette condition est remplie en utilisant une application \textit{JavaFX}, suppor
 
 \subsubsection{Contingence}
 
-Le risque principal serait que le client travaille sur une machine ne possédant pas un environnement \textit{Java} à jour. Pour pallier à ce problème, nous avons proposerons un script d'installation du dernier environnement \textit{Java}.
+Le risque principal serait que le client travaille sur une machine ne possédant pas un environnement \textit{Java} à jour. Pour pallier ce problème, nous proposerons un script d'installation du dernier environnement \textit{Java}.
 
 \subsubsection{Test}
 
-Lancer l'application dans chacun des systèmes d’exploitation cités précédemment. L'application devra fonctionner sur chacun de ces systèmes d'exploitation, sans quoi, la contrainte ne serait pas remplie.
+Lancer l'application dans chacun des systèmes d’exploitation cités précédemment. L'application devra fonctionner sur chacun d'entre eux, sans quoi, la contrainte ne serait pas remplie.
 
 \subsubsection{Priorité : \textit{Critique}}
 
@@ -63,7 +63,7 @@ Le risque serait que le formatage de la partition de la clef USB ne soit pas pri
 
 \subsubsection{Test}
 
-Faire fonctionner l’application à partir d’une clef USB (ou disque dur externe selon le support qui sera choisi) sur les différents systèmes d’exploitations cités précédemment. L'application devra fonctionner en \textit{standalone}, sauf dans le cas d'un environnement \textit{Java} non à jour, comme précisé en \ref{systems}.
+Faire fonctionner l’application à partir d’une clef USB (ou disque dur externe selon le support qui sera choisi) sur les différents systèmes d’exploitation cités précédemment. L'application devra fonctionner en \textit{standalone}, sauf dans le cas d'un environnement \textit{Java} non à jour, comme précisé en \ref{systems}.
 
 \subsubsection{Priorité : \textit{Critique}}
 
@@ -71,7 +71,7 @@ Faire fonctionner l’application à partir d’une clef USB (ou disque dur exte
 
 \subsubsection{Description}
 
-Le client doit pouvoir enregistrer dans la base de données, de nouvelles vidéos et de nouveaux sons afin d’augmenter l’efficience de ses tests. De plus, pour améliorer ses recherches, notre client pourra ajouter des questions avec leurs correspondances audios et vidéos.
+Le client doit pouvoir enregistrer dans la base de données, de nouvelles vidéos et de nouveaux sons afin d'améliorer l’efficience de ses tests. De plus, pour améliorer ses recherches, notre client pourra ajouter des questions avec leurs correspondances audios et vidéos.
 Cet ajout de médias devra être possible en ligne de commande sous un système \textit{Unix}, en passant un fichier texte dans un paramètre.
 
 \subsubsection{Faisabilité}
@@ -82,7 +82,7 @@ Puis, pour réaliser l'administration en ligne de commande, une application anne
 \subsubsection{Test}
 
 Ajouter du contenu multimédia (audio et video) et une question puis lister tout le contenu de la base de données pour voir si l’ajout à été pris en compte.
-Une réussie du test se concluera par une base de données remplie via l'application annexe, et une application graphique qui fonctionnera (qui accèdera au médias et les affichera).
+Une réussite du test se concluera par une base de données remplie via l'application annexe, et une application graphique qui fonctionnera (qui accèdera au médias et les affichera).
 
 \subsubsection{Priorité : \textit{Moyenne}}
 
@@ -90,7 +90,7 @@ Une réussie du test se concluera par une base de données remplie via l'applica
 
 \subsubsection{Description}
 
-Le contenu multimédia de notre client étant composé de différents formats vidéos et audios, utilisants des codecs variés, l’application doit pouvoir assurer une lecture optimale de ces médias.
+Le contenu multimédia de notre client étant composé de différents formats vidéo et audio, utilisants des codecs variés, l’application doit pouvoir assurer une lecture optimale de ces médias.
 
 Effectivement, c’est un obstacle que l’on rencontre dès que l’on commence à programmer dans le domaine de la vidéo et de l’audio (des références étudiant certaines de ces contraintes : \cite{ghanbari1999video} et \cite{he2013introduction}).
 Le fond du problème est l’utilisation de Codecs (vidéo et audio) pour lire les différents types de fichiers, qui sont encodés selon différentes normes.
@@ -140,12 +140,12 @@ Ces combinaisons sont importantes pour notre client, nous devons donc les récup
 
 \subsubsection{Faisabilité}
 
-La solution à ce besoin serait une base de données, stockant l’ensemble des questions, sons, vidéos et réponses attendues.
+La solution à ce besoin serait une base de données stockant l’ensemble des questions, sons, vidéos et réponses attendues.
 L’application devra ensuite exporter les réponses et l'identité de l'utilisateur sous forme d’un fichier \textit{txt}, fichier qu’exploitera le client.   
 
 \subsubsection{Test}
 
-Faire faire le test à un faux sujet, et vérifier les données exportées dans le fichier \textit{txt}. Il sera possible de lire le contenu de cet export facilement, avec un éditeur de texte.
+Demander à faux sujet de mener le test, et vérifier les données exportées dans le fichier \textit{txt}. Il sera possible de lire le contenu de cet export facilement, avec un éditeur de texte.
 
 \subsubsection{Priorité : \textit{Moyenne}}
 
@@ -153,7 +153,7 @@ Faire faire le test à un faux sujet, et vérifier les données exportées dans 
 
 \subsubsection{Description}
 
-Afin de pouvoir exploiter les résultats des tests, le client veut récupérer des informations sur les sujets.
+Afin d'exploiter les résultats des tests, le client veut récupérer des informations sur les sujets.
 Les informations que l’on doit récupérer sont les suivantes :\\
 \begin{itemize}
  \item[-]  nom
@@ -170,7 +170,7 @@ Pour répondre à ce besoin, il faut implémenter un formulaire au lancement de 
 
 \subsubsection{Test}
 
-Faire essayer l’application à une personne tierce, puis, vérifier que toutes les informations sur la personne ont bien été récupérées.
+Faire essayer l’application à une tierce personne puis vérifier que toutes les informations sur la personne ont bien été récupérées.
 
 \subsubsection{Priorité : \textit{Faible}}
 
@@ -198,13 +198,13 @@ Demander à un développeur externe au projet d’essayer de comprendre notre co
 
 \subsubsection{Description}
 
-L’application sera ergonomique pour permettre au sujet de se concentrer un maximum sur le test et pas sur le fonctionnement de ladite application. De plus, le sujet soumis au test sera possiblement novice en informatique, l’application devra ainsi être intuitive.
+L’application sera ergonomique pour permettre au sujet de se concentrer principalement sur le test et pas sur le fonctionnement de ladite application. De plus, le sujet soumis au test sera possiblement novice en informatique, l’application devra ainsi être intuitive.
 
 \subsubsection{Faisabilité}
 
 Pour satisfaire ce besoin, nous devons mettre en place un graphisme épuré de tout accessoires détournant l’attention. De plus, nous utiliserons des couleurs de ton pastel pour éviter de fatiguer le regard de l’utilisateur.
 
-Cette contrainte est satisfaisable en s’inspirant de nombreux designs qui ont déjà été développés et publiés sur le web. On s’appuiera notamment sur l’article \cite{lente2014scenariser} qui étudie la \textit{“collaboration entre Ergonomie, Design et Ingénierie”}.
+Cette contrainte peut être satisfaite en s’inspirant de nombreux designs qui ont déjà été développés et publiés sur le web. On s’appuiera notamment sur l’article \cite{lente2014scenariser} qui étudie la \textit{“collaboration entre Ergonomie, Design et Ingénierie”}.
 
 \subsubsection{Test}
 
@@ -214,7 +214,7 @@ Utilisation de l’application par plusieurs sujets sans donner d’indication s
 
 \section{Prototype d'application}
 
- Un \textbf{\textit{prototype}} de rendu est présenté ci-dessous. L'application finale que nous présentons pourra diférer quelque peu de ce prototype.
+ Un \textbf{\textit{prototype}} de rendu est proposé ci-dessous. L'application finale que nous présenterons pourra diférer quelque peu de ce prototype.
 
 \begin{figure}[!ht]
  \begin{center}
