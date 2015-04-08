@@ -5,24 +5,21 @@ L'UE de projet de programmation a été importante lors de cette première anné
 
 Ce projet nous permet d'avoir une ligne supplémentaire dans nos CV respectifs. Plus qu'une mise en situation, c'est, en soit, une expérience professionnelle, puisque nous avions un client à satisfaire.
 
-Nous pouvons aussi souligner l'expérience de travail en équipe qui induit une bonne répartition des tâches ainsi que l'utilisation d'une gestionnaire de version (dans notre cas, \textit{Github}).
+Nous pouvons aussi souligner l'expérience de travail en équipe qui induit une bonne répartition des tâches ainsi que l'utilisation d'un gestionnaire de version (dans notre cas, \textit{Github}).
 
 Cependant, notre application n'est pas optimale et plusieurs poursuites de projet peuvent être envisagées :
 
 \begin{itemize}
- \item La sauvegarde et la reprise des tests en cas de crash de l'application serait une poursuite à mettre en place dans l'avenir. En effet, notre application extrait les données utilisateur ainsi que ses réponses en fin de test. Malheureusement à cause de ce système, un crash ne permet pas d'avoir une sauvegarde préalable. La solution serait d'écrire dans le fichier texte à chaque validation de réponses. Ensuite en cas d'arrêt non voulu de l'application, un algorithme serait mis en place à partir du fichier créé qui permettrait de retrouver le nombre de questions restantes.
- \item 
+ \item La sauvegarde et la reprise des tests en cas de crash de l'application seraient des poursuites à mettre en place dans l'avenir. En effet, notre application extrait les données utilisateur ainsi que ses réponses en fin de test. Malheureusement à cause de ce système, un crash ne permet pas d'avoir une sauvegarde préalable. La solution serait d'écrire dans le fichier texte à chaque validation de réponses. Ensuite en cas d'arrêt non voulu de l'application, un algorithme serait mis en place à partir du fichier créé qui permettrait de retrouver le nombre de questions restantes.
+ \item L'ajout de la synchronisation audio-vidéo : nos recherches nous ont menés sur deux pistes différentes. La première était l'utilisation de la bibliothèque Xuggle\footnote{http://www.xuggle.com/xuggler/}. Elle utilise les bibliothèques FFmpeg permettant d'encoder et de décoder des fichiers audio et vidéo.
+Son utilisation est cependant inappropriée du fait que le projet ait été abandonné et rendant par la même occasion la synchronisation mal venue. En effet, la communauté n'est plus active.
 \end{itemize}
-
-
-L'ajout de la synchronisation audio-vidéo : nos recherches nous ont menés sur deux pistes différentes. La première était l'utilisation de la bibliothèque Xuggle\footnote{http://www.xuggle.com/xuggler/}. Elle utilise les bibliothèques FFmpeg permettant d'encoder, de décoder des fichiers audio et vidéo.
-Son utilisation est cependant inappropriée du fait que le projet ait été abandonné et rendant par la même occasion la synchronisation mal venue. En effet aucun support n'est disponible via cette bibliothèque si besoin est.
 
 Par la suite, nos recherches nous ont amené à étudier la bibliothèque \textit{Opencv}\footnote{http://opencv.org/}. Elle est la référence dans le domaine du traitement d'images.
 
-Comprenant de nombreuses fonctionnalités, elle possède celles que nous recherchions, c'est à dire la lecture, l'écriture et l'affichage d’une vidéo. Elle nous permettrait notamment la modification du nombre d'images par seconde de notre fichier vidéo pour pouvoir avoir une bonne synchronisation, en prenant pour référence notre fichier audio, et idéalement, les séquences correspondantes de phonèmes.
+Comprenant de nombreuses fonctionnalités, elle possède celles que nous recherchions, c'est à dire la lecture, l'écriture et l'affichage d’une vidéo. Elle nous permettrait notamment de modifier le nombre d'images par seconde de notre fichier vidéo. De plus, pour compléter la synchronisation, nous prendrions comme référence notre fichier audio, et idéalement, les séquences correspondantes de phonèmes.
 
-Nous avons pensé à un algorithme pour pouvoir mixer les deux fichiers. Il a été pensé sur papier mais n'a pas été mis en œuvre, par manque de temps.
+Nous avons pensé à un algorithme pour pouvoir mixer les deux fichiers. Il a été implémenté sur papier mais n'a pas été mis en œuvre, par manque de temps.
 
 \begin{verbnobox}[\small]
 
@@ -76,7 +73,7 @@ FinSi;
 
 \end{verbnobox}
 
-\textbf{Stream} : un ensemble de données accessibles dans le temps. Les éléments d'un stream sont appelés \textit{Frame} et chaque \textit{Frame} est encodée par une sorte différente de codec.
+\textbf{Stream} : représentation d'une suite ordonnée d'objets (habituellement des octets) accessible séquentiellement.
 
 
 \textbf{Packet} : partition de données qui contient des bits. Ces bits sont décodés dans des \textit{Frames} pour que finalement nous puissions les manipuler.

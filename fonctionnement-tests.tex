@@ -213,7 +213,7 @@ Nous allons décrire le fonctionnement de cette application en partant des choix
 \subsubsection{Paramètre ``add''}
 
 L'ajout de contenu se fait par le biais d'un fichier (sans extension) contenant du simple texte.
-Ce texte doit être formatté selon les règles suivantes :
+Ce texte doit être formaté selon les règles suivantes :
 \begin{itemize}
  \item Ajout de vidéos : le nom d'une vidéo par ligne, selon la syntaxe :
   \begin{verbnobox}[\small][0-9]*_[0-9]*_[0-9]*_[a-zA-Z0-9]*_[a-z]{2}_[a-zA-Z0-9]*_[a-zA-Z0-9]*.[a-zA-Z0-9]*\end{verbnobox}
@@ -267,15 +267,15 @@ Comme dans un terminal \textit{Shell}, le paramètre \textbf{ls} permet de liste
 Pour réaliser les tests unitaires sur la base de données, nous avons utilisé le plugin \textit{JUnit}, disponible par défaut dans l'IDE \textit{Netbeans}.
 Ce plugin permet de tester chaque méthode, afin de détecter d'éventuels problèmes d'implémentation.
 
-Ces tests unitaires ont été effectués majoritairement dans le modèle (voir \ref{modele}), en particulier sur la classe \textit{Database}, cœur de la gestion des données. La seconde partie de ces tests ont été faits dans le contrôleur (voir \ref{archi_controller}), sur les classes \textit{SelectMedia} et \textit{MediaSelected} lors des créations de listes de médias.
+Ces tests unitaires ont été effectués majoritairement dans le modèle (voir \ref{modele}), en particulier sur la classe \textit{Database}, cœur de la gestion des données. La seconde partie de ces tests a été faite dans le contrôleur (voir \ref{archi_controller}), sur les classes \textit{SelectMedia} et \textit{MediaSelected} lors des créations de listes de médias.
 
 \paragraph{Boîte noire}
 
-Les tests boîte noire avec \textit{JUnit} correspondent aux tests d'entrée-sortie. On teste chaque méthode, on donne un objet en entrée et on vérifie que l'objet en sortie est bien le résultat attendu.
+Les tests boites noires avec \textit{JUnit} correspondent aux tests d'entrée-sortie. On teste chaque méthode, on donne un objet en entrée et on vérifie que l'objet en sortie est bien le résultat attendu.
 
 \paragraph{Boîte blanche}
 
-Les tests boites blanches avec \textit{JUnit} permettent de vérifier la les différents cas d'utilisation d'une fonction (par exemple, la méthode \textit{addVideo} ajoute une vidéo dans la BDD seulement si celle-ci n'existe pas encore).
+Les tests boites blanches avec \textit{JUnit} permettent de vérifier les différents cas d'utilisation d'une fonction (par exemple, la méthode \textit{addVideo} ajoute une vidéo dans la BDD seulement si celle-ci n'existe pas encore).
 
 
 Afin de contrôler l'efficacité de nos tests, nous avons utilisé un plugin disponible de \textit{Netbeans} (\textit{TikiOne JaCoCoverage Plugin}). Ce plugin surligne en vert (zones parcourues), jaune (zones parcourues, mais pas dans toutes les branches) ou rouge (zones non-parcourues, les erreurs en général), selon les zones de codes parcourues par les tests (voir \textsc{Figure} \ref{cocojava}).
@@ -291,11 +291,11 @@ Afin de contrôler l'efficacité de nos tests, nous avons utilisé un plugin dis
 
 \subsection{Performances}
 
-Afin de réaliser les tests de performance, nous avons simplement utilisé un plugin de \textit{Netbeans} (\textsc{Figure} \ref{perf}). Ce plugin permet de mesurer les performance en temps CPU.
+Afin de réaliser les tests de performance, nous avons simplement utilisé un plugin de \textit{Netbeans} (\textsc{Figure} \ref{perf}). Ce plugin permet de mesurer les performances en temps CPU.
 
 Sachant déjà que nous avions un problème de performance pendant le chargement de la page \textit{TestGUI} (voir \ref{GUI}), ce test nous a permis d'identifier le code fautif.
 Ainsi, l'accès à la base de données a été mis en cause. La méthode de connexion étant seulement gérée par le driver \textit{SQLite-jdbc}, nous pouvons donc en conclure que notre gestion des accès à la BDD n'est pas optimisée.
-Une piste d'amélioration serait de modifier le moment d'accès à la base de données. Il serait facilement envisageable de cloner la totalité de la BDD au lancement de l'application avec le pattern \textit{DAO (Data Access Object}. Ce pattern permet de créer une séparation entre la BDD et l'application. L'application n'accède pas directement à la base de données, mais à une réplique formée d'objets.
+Une piste d'amélioration serait de modifier le moment d'accès à la base de données. Il serait facilement envisageable de cloner la totalité de la BDD au lancement de l'application avec le pattern \textit{DAO (Data Access Object)}. Ce pattern permet de créer une séparation entre la BDD et l'application. L'application n'accède pas directement à la base de données, mais à une réplique formée d'objets.
 Ainsi, le chargement de toute la BDD étant fait au lancement de l'application, plus aucune latence ne se ferait ressentir, vu que les accès en BDD n'existeraient plus, pour laisser la place à l'accès à des objets beaucoup plus rapide.
 De plus, notre architecture récupérant les informations de la BDD, en ayant une table correspondant à un type d'objet, facilite la transition vers un tel pattern.
 

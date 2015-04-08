@@ -133,7 +133,7 @@ Toutes ces implémentations sont fonctionnelles. Des tests ont été réalisés 
 Les accès à la base de données sont effectués par le driver\footnote{sqlite-jdbc-3.8.7} \textit{Java} de \textit{SQLite}.
 
 Pour éviter tout conflit lors de l'accès à la base de données, des transactions manuelles ont été mises en place : un verrou est créé à chaque accès. Ainsi, un double accès ne peut pas être effectué.
-Etant donné que \textit{SQLite} ne gère pas les contraintes de clé étrangère, nous avons établi un système de vérification en \textit{Java}. Cette vérification vérifie avant chaque modification sensible (suppression d'une vidéo qui pourrait être liée à une question par exemple), qu'aucune dépendance ne sera brisée.
+Etant donné que \textit{SQLite} ne gère pas les contraintes de clé étrangère, nous avons établi un système de vérification en \textit{Java}. Elle inspecte chaque modification sensible (suppression d'une vidéo qui pourrait être liée à une question par exemple), qu'aucune dépendance ne sera brisée.
 
 
 \subsection{Contrôleur}\label{controller}
@@ -155,7 +155,7 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
  éléments :
  
  \begin{itemize}
-  \item \textit{Answer.java} qui permet de créer un objet \textit{Answer} afin centraliser les données à extraire.
+  \item \textit{Answer.java} qui permet de créer un objet \textit{Answer} afin de centraliser les données à extraire.
   \item \textit{User.java} qui a la même fonction que la classe précédente, mais qui contient les informations sur l'utilisateur (informations récupérées dans l'interface \textit{UserGUI}, voir \ref{GUI}).
   \item \textit{Extract} extrait les données contenues dans les deux précédents types d'objet, et les écrit dans un fichier texte, comme dans l'exemple suivant :
  \end{itemize}
@@ -170,7 +170,7 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
       Years learning tongue selected   1
   List of answers
       Answer 1:
-	    Question:   Pouvez-vous exprimer la douleur avec ces audios et vidéo ?
+	    Question:   Pouvez-vous exprimer la douleur avec ces audios et vidéos ?
 	    Video   ADMI_B_ok
 	    Audio   ADMI
 
@@ -182,7 +182,7 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
 L'administration est une application qui fonctionne indépendamment de l'application graphique.
 Elle est lancée en ligne de commande (\textit{java -jar <fichier.jar> <paramètre 0> <paramètre 1> <paramètre 2>}), les paramètres correspondants aux différentes fonctionnalités.
 Nous avons décidé de créer nos propres arguments au lieu de laisser la possibilité à l'administrateur de lancer directement des requêtes \textit{SQL}. Ce choix a été fait afin d'éviter toute corruption involontaire de la BDD. Dans notre application, seuls les fichiers adaptés, avec les noms adaptés peuvent être ajoutés.
-Ce besoin de contrôle de la nommenclature est nécessaire car nous extrayons l'ensemble des informations sur les médias (langue, format, titre du média) depuis leur nom.
+Ce besoin de contrôle de la nomenclature est nécessaire car nous extrayons l'ensemble des informations sur les médias (langue, format, titre du média) depuis leur nom.
 
 Nous allons décrire le fonctionnement de cette application en partant des choix de paramètres possibles, récapitulés ci-dessous :
 
@@ -213,7 +213,7 @@ Nous allons décrire le fonctionnement de cette application en partant des choix
 \subsubsection{Paramètre ``add''}
 
 L'ajout de contenu se fait par le biais d'un fichier (sans extension) contenant du simple texte.
-Ce texte doit être formatté selon les règles suivantes :
+Ce texte doit être formaté selon les règles suivantes :
 \begin{itemize}
  \item Ajout de vidéos : le nom d'une vidéo par ligne, selon la syntaxe :
   \begin{verbnobox}[\small][0-9]*_[0-9]*_[0-9]*_[a-zA-Z0-9]*_[a-z]{2}_[a-zA-Z0-9]*_[a-zA-Z0-9]*.[a-zA-Z0-9]*\end{verbnobox}
@@ -267,15 +267,15 @@ Comme dans un terminal \textit{Shell}, le paramètre \textbf{ls} permet de liste
 Pour réaliser les tests unitaires sur la base de données, nous avons utilisé le plugin \textit{JUnit}, disponible par défaut dans l'IDE \textit{Netbeans}.
 Ce plugin permet de tester chaque méthode, afin de détecter d'éventuels problèmes d'implémentation.
 
-Ces tests unitaires ont été effectués majoritairement dans le modèle (voir \ref{modele}), en particulier sur la classe \textit{Database}, cœur de la gestion des données. La seconde partie de ces tests ont été faits dans le contrôleur (voir \ref{archi_controller}), sur les classes \textit{SelectMedia} et \textit{MediaSelected} lors des créations de listes de médias.
+Ces tests unitaires ont été effectués majoritairement dans le modèle (voir \ref{modele}), en particulier sur la classe \textit{Database}, cœur de la gestion des données. La seconde partie de ces tests a été faite dans le contrôleur (voir \ref{archi_controller}), sur les classes \textit{SelectMedia} et \textit{MediaSelected} lors des créations de listes de médias.
 
 \paragraph{Boîte noire}
 
-Les tests boîte noire avec \textit{JUnit} correspondent aux tests d'entrée-sortie. On teste chaque méthode, on donne un objet en entrée et on vérifie que l'objet en sortie est bien le résultat attendu.
+Les tests boites noires avec \textit{JUnit} correspondent aux tests d'entrée-sortie. On teste chaque méthode, on donne un objet en entrée et on vérifie que l'objet en sortie est bien le résultat attendu.
 
 \paragraph{Boîte blanche}
 
-Les tests boites blanches avec \textit{JUnit} permettent de vérifier la les différents cas d'utilisation d'une fonction (par exemple, la méthode \textit{addVideo} ajoute une vidéo dans la BDD seulement si celle-ci n'existe pas encore).
+Les tests boites blanches avec \textit{JUnit} permettent de vérifier les différents cas d'utilisation d'une fonction (par exemple, la méthode \textit{addVideo} ajoute une vidéo dans la BDD seulement si celle-ci n'existe pas encore).
 
 
 Afin de contrôler l'efficacité de nos tests, nous avons utilisé un plugin disponible de \textit{Netbeans} (\textit{TikiOne JaCoCoverage Plugin}). Ce plugin surligne en vert (zones parcourues), jaune (zones parcourues, mais pas dans toutes les branches) ou rouge (zones non-parcourues, les erreurs en général), selon les zones de codes parcourues par les tests (voir \textsc{Figure} \ref{cocojava}).
