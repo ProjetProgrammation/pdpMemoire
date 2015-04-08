@@ -1,14 +1,33 @@
 \chapter{Fonctionnement et tests}
 
-Dans cette partie nous chercherons à décrire dans un premier temps les fonctionnements, ou, le cas échéant, les non fonctionnements de notre application.  Nous aborderons ensuite la politique de tests effectuée pour vérifier notre code. 
+Dans cette partie nous chercherons à décrire dans un premier temps les fonctionnements ou, le cas échéant, les non fonctionnements de notre application. Nous aborderons ensuite la politique de test menée pour vérifier notre code. 
 
 \section{Fonctionnement}
 
-L'application est séparée en deux modules, qui sont le module de test prosodique contenant l'interface graphique, et un module d'administration utilisable en ligne de commande. Ces deux modules partagent la même BDD. Ils sont donc, une fois compilés et compressés dans des \textit{jar}, situés dans le même répertoire, pour accéder à une BDD commune. Afin de garder une organisation des fichiers qui seront créés ou importés, nous avons codé un script créant toute l'organisation des fichiers de l'application lors de sa première utilisation. Ce script crée les répertoires avec l'arborescence suivante :
+Afin d'introduire le fonctionnement des deux modules de l'application, nous avons réalisé deux diagrammes de séquences décrivant le fonctionnement global du programme :
 
 \begin{figure}[!ht]
 \begin{center}
-  \fbox{\includegraphics[width=6cm]{./fonctionnement_tests/tree.png}}
+  \fbox{\includegraphics[width=10cm]{./fonctionnement_tests/sequence.png}}
+  \caption{Fonctionnement - Fonctionnement interface graphique}
+  \label{sequence} 
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+  \fbox{\includegraphics[width=10cm]{./fonctionnement_tests/sequenceAdmin.png}}
+  \caption{Fonctionnement - Fonctionnement administration}
+  \label{seqenceAdmin} 
+\end{center}
+\end{figure}
+
+\newpage
+L'application est séparée en deux modules, qui sont le module de test prosodique contenant l'interface graphique, et un module d'administration utilisable en ligne de commande. Ces deux modules partagent la même BDD. Ils sont donc, une fois compilés et compressés dans des \textit{jar}, situés dans le même répertoire, pour accéder à une BDD commune. Afin de garder une organisation des fichiers qui seront créés ou importés, nous avons codé un script organisant des fichiers de l'application lors de sa première utilisation. Ce script crée les répertoires avec l'arborescence suivante :
+
+\begin{figure}[!ht]
+\begin{center}
+  \fbox{\includegraphics[width=5cm]{./fonctionnement_tests/tree.png}}
   \caption{Fonctionnement - Organisation répertoires}
   \label{tree} 
 \end{center}
@@ -24,13 +43,13 @@ Tout d'abord, nous allons expliquer notre choix de technologie, qui s'est orient
 Nous pensions dans un premier temps développer l'application en deux étapes séparées : une première partie en \textit{Java} pour le côté traitement, puis une partie en \textit{Java EE} afin de pouvoir générer des pages \textit{HTML} pour l'interface graphique, et ainsi pouvoir complètement gérer l'apparence de notre application. 
 
 Ensuite, après quelques recherches sur internet, nous avons découvert l'existance du \textit{JavaFX}.
-Cette librairie de \textit{Java}, est vue par ses créateurs comme l'évolution de \textit{Swing}.
+Cette librairie de \textit{Java} est vue par ses créateurs comme l'évolution de \textit{Swing}.
 Elle en est une évolution du fait du total contrôle que l'on a sur l'apparence de l'interface créée : contrairement à \textit{Swing}, où l'on utilise des composants inaltérables, tous les éléments sont personnalisables (boutons, arrière plan, police, organisation et taille des éléments).
 Cette librairie était donc adaptée, car nous avions comme contrainte de développer une application ergonomique, ce qui n'est pas le cas d'une application développée avec \textit{Swing}, très limitée graphiquement.\\
 \\
 
 
-La méthode \textit{main} de Start.java est appelée lors du démarrage de l'application. Cette méthode fait créé une instance de UserGUI, la première page de l'application qui s'affiche.
+La méthode \textit{main} de Start.java est appelée lors du démarrage de l'application. Cette méthode fait créer une instance de UserGUI, la première page de l'application qui s'affiche.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -41,9 +60,9 @@ La méthode \textit{main} de Start.java est appelée lors du démarrage de l'app
 \end{figure}
 
 Pour récupérer les langues disponibles, UserGUI fait appel au contrôleur, dont nous décrirons le fonctionnement par la suite.
-Les informations entrées par l'utilisateur dans les champs de ``\textsc{about you}'' (voir \textsc{Figure} \ref{UserGUI}) sont récupérés lors du clic sur le bouton ``\textsc{next}''. Ces données sont récupérées dans un fichier \textit{txt} par le biais du package \textit{Extract} que nous allons voir plus tard.
+Les informations entrées par l'utilisateur dans les champs de ``\textsc{about you}'' (voir \textsc{Figure} \ref{UserGUI}) sont récupérées lors du clic sur le bouton ``\textsc{next}''. Ces données sont récupérées dans un fichier \textit{txt} par le biais du package \textit{Extract} que nous allons voir plus tard.
 
-Après l'exportation des données sur l'utilisateur, un lien est fait vers la seconde page de l'interface : ChooseGUI (voir \textsc{Figure} \ref{ChooseGUI}). Cette page est une simple page avec deux boutons pour savoir dans quel mode veut aller l'utilisateur (apprentissage da l'application ou test concret).
+Après l'exportation des données sur l'utilisateur, un lien est fait vers la seconde page de l'interface : ChooseGUI (voir \textsc{Figure} \ref{ChooseGUI}). Cette page est une simple page avec deux boutons pour savoir dans quel mode veut aller l'utilisateur (apprentissage de l'application ou test concret).
 
 
 \begin{figure}[!ht]
@@ -54,7 +73,7 @@ Après l'exportation des données sur l'utilisateur, un lien est fait vers la se
 \end{center}
 \end{figure}
 
-On est ensuite dirigé vers le page de test (identique dans le mode ``\textsc{training}'' et ``\textsc{not training}''). La seule différence entre les deux mode est l'exportation de données : dans le test réel, les données sont exportées tandis que dans le mode de découverte, rien n'est exporté.
+On est ensuite dirigé vers la page de test (identique dans le mode ``\textsc{training}'' et ``\textsc{not training}''). La seule différence entre les deux modes est l'exportation de données : dans le test réel, les données sont exportées tandis que dans le mode de découverte, rien n'est exporté.
 Les données exportées sont :
 \begin{itemize}
  \item Les questions posées
@@ -72,9 +91,9 @@ Ces précédentes données sont un choix parmis plusieurs. Ces listes de choix s
 \end{center}
 \end{figure}
 
-Les boutons ``\textsc{preview}'' permettent de voir le contenu des vidéos et d'écouter les sons disponibles dans les différentes listes. Afin d'être joués, les médias sont ouverts (voir \textsc{Figure} \ref{VLC} avec VLC (en \textit{standalone}) en faisant appel à la librairie VLC inclue dans le projet (librairie implémentaée dans la classe \textit{MediaPlayer}). Nous avons choisi d'utiliser ce lecteur de médias car le lecteur par défaut de \textit{JavaFX} est trop strict au niveau des codecs vidéo et audio qu'il accepte. VLC, quant à lui, nous offre la possibilité de lire la totalité des médias que l'on doit traiter. Ensuite, la stratégie du \textit{standalone} a été utilisée, car une intégration d'un lecteur non natif \textit{JavaFX} nécessite l'utilisation de la librairie \textit{Swing}, qui connait énormément de problèmes d'intégration à l'interface \textit{JavaFX}.
+Les boutons ``\textsc{preview}'' permettent de voir le contenu des vidéos et d'écouter les sons disponibles dans les différentes listes. Afin d'être joués, les médias sont ouverts (voir \textsc{Figure} \ref{VLC} avec VLC (en \textit{standalone}) en faisant appel à la librairie VLC inclue dans le projet (librairie implémentée dans la classe \textit{MediaPlayer}). Nous avons choisi d'utiliser ce lecteur de médias car le lecteur par défaut de \textit{JavaFX} est trop strict au niveau des codecs vidéos et audios qu'il accepte. VLC, quant à lui, nous offre la possibilité de lire la totalité des médias que l'on doit traiter. Ensuite, la stratégie du \textit{standalone} a été utilisée, car une intégration d'un lecteur non natif \textit{JavaFX} nécessite l'utilisation de la librairie \textit{Swing}, qui connait énormément de problèmes d'intégration à l'interface \textit{JavaFX}.
 
-Ceci reste tout de même une voie intéressante d'amélioration. Nous avons nous même tenté de palier à ce problème, en convertissant les médias à la volée, en utilisant l'extension \textit{Xuggler}. Cependant, ceci demandait beaucoup de temps, et la duplication de tous les médias (ce qui n'est pas négligeable compte tenu de notre besoin d'avoir une application nomade, donc légère).
+Ceci reste tout de même une voie intéressante d'amélioration. Nous avons nous même tenté de palier ce problème en convertissant les médias à la volée, en utilisant l'extension \textit{Xuggler}. Cependant, ceci demandait beaucoup de temps, et la duplication de tous les médias (ce qui n'est pas négligeable compte tenu de notre besoin d'avoir une application nomade, donc légère).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -84,7 +103,7 @@ Ceci reste tout de même une voie intéressante d'amélioration. Nous avons nous
 \end{center}
 \end{figure}
 
-Finalement, une fois le test terminé, l'utilisateur est redirigé vers une page terminal contenant juste un message de remerciements, ainsi qu'un bouton ramenant vers la première page (\textit{UserGUI}).
+Finalement, une fois le test terminé, l'utilisateur est redirigé vers une page terminale contenant juste un message de remerciement, ainsi qu'un bouton ramenant vers la première page (\textit{UserGUI}).
 
 \begin{figure}[!ht]
 \begin{center}
@@ -96,8 +115,8 @@ Finalement, une fois le test terminé, l'utilisateur est redirigé vers une page
 
 \subsection{Base de données}\label{BDD}
 
-Le système de gestion de base de données relationnelles (SGBDR) choisi a été \textit{SQLite}. Ce SGBDR est utilisable sur n'importe quelle plateforme, sans nécessiter l'installation et la mise en place d'un serveur, il se résume à un fichier \textit{.db} qui contient toute la base de données.
-Pour le fontionnement de l'application, des méthodes d'accès à la base de données ont été necessaires à implémenter :
+Le système de gestion de base de données relationnelles (SGBDR) choisi a été \textit{SQLite}. Ce SGBDR est utilisable sur n'importe quelle plateforme, sans nécessiter l'installation et la mise en place d'un serveur. Il se résume à un fichier \textit{.db} qui contient toute la base de données.
+Pour le fontionnement de l'application, l'implémentation de méthodes d'accès à la base de données a été necessaire :
 
 
 \begin{itemize}
@@ -113,8 +132,8 @@ Pour le fontionnement de l'application, des méthodes d'accès à la base de don
 Toutes ces implémentations sont fonctionnelles. Des tests ont été réalisés dessus (voir \ref{tests}).
 Les accès à la base de données sont effectués par le driver\footnote{sqlite-jdbc-3.8.7} \textit{Java} de \textit{SQLite}.
 
-Pour éviter tout conflit lors de l'accès à la base de données, des transactions manuelles ont été mises en place : un verrou est créé à chaque accès, ainsi un double accès ne peut pas être effectué.
-Etant donné que \textit{SQLite} ne gère pas les contraintes de clef étrangère, nous avons établi un système de vérification en \textit{Java}. Cette vérification vérifie avant chaque modification sensible (suppression d'une vidéo qui pourrait être liée à une question par exemple), qu'aucune dépendance ne sera brisée.
+Pour éviter tout conflit lors de l'accès à la base de données, des transactions manuelles ont été mises en place : un verrou est créé à chaque accès. Ainsi, un double accès ne peut pas être effectué.
+Etant donné que \textit{SQLite} ne gère pas les contraintes de clé étrangère, nous avons établi un système de vérification en \textit{Java}. Cette vérification vérifie avant chaque modification sensible (suppression d'une vidéo qui pourrait être liée à une question par exemple), qu'aucune dépendance ne sera brisée.
 
 
 \subsection{Contrôleur}\label{controller}
@@ -162,8 +181,8 @@ Tout ce qui concerne l'exportation des données se situe dans le package \textit
 
 L'administration est une application qui fonctionne indépendamment de l'application graphique.
 Elle est lancée en ligne de commande (\textit{java -jar <fichier.jar> <paramètre 0> <paramètre 1> <paramètre 2>}), les paramètres correspondants aux différentes fonctionnalités.
-Nous avons décidé de créer nos propres arguments, au lieu de laisser la possibilité à l'administrateur de lancer directement des requêtes \textit{SQL}. Ce choiw a été fait afin d'éviter toute corruption involontaire de la BDD. Dans notre application, seuls les fichiers adaptés, avec les noms adaptés peuvent être ajoutés.
-Ce besoin de contrôle de la nommenclature est nécessaire, car nous extrayons l'ensemble des informations sur les médias (langue, format, titre du média) depuis leur nom.
+Nous avons décidé de créer nos propres arguments au lieu de laisser la possibilité à l'administrateur de lancer directement des requêtes \textit{SQL}. Ce choix a été fait afin d'éviter toute corruption involontaire de la BDD. Dans notre application, seuls les fichiers adaptés, avec les noms adaptés peuvent être ajoutés.
+Ce besoin de contrôle de la nommenclature est nécessaire car nous extrayons l'ensemble des informations sur les médias (langue, format, titre du média) depuis leur nom.
 
 Nous allons décrire le fonctionnement de cette application en partant des choix de paramètres possibles, récapitulés ci-dessous :
 
@@ -275,9 +294,9 @@ Afin de contrôler l'efficacité de nos tests, nous avons utilisé un plugin dis
 Afin de réaliser les tests de performance, nous avons simplement utilisé un plugin de \textit{Netbeans} (\textsc{Figure} \ref{perf}). Ce plugin permet de mesurer les performance en temps CPU.
 
 Sachant déjà que nous avions un problème de performance pendant le chargement de la page \textit{TestGUI} (voir \ref{GUI}), ce test nous a permis d'identifier le code fautif.
-Ainsi, l'accès à la base de données a été mise en cause. La méthode de connexion étant seulement gérée par le driver \textit{SQLite-jdbc}, nous pouvons donc en conclure que notre gestion des accès à la BDD n'est pas optimisé à son maximum.
+Ainsi, l'accès à la base de données a été mis en cause. La méthode de connexion étant seulement gérée par le driver \textit{SQLite-jdbc}, nous pouvons donc en conclure que notre gestion des accès à la BDD n'est pas optimisée.
 Une piste d'amélioration serait de modifier le moment d'accès à la base de données. Il serait facilement envisageable de cloner la totalité de la BDD au lancement de l'application avec le pattern \textit{DAO (Data Access Object}. Ce pattern permet de créer une séparation entre la BDD et l'application. L'application n'accède pas directement à la base de données, mais à une réplique formée d'objets.
-Ainsi, la chargement de toute la BDD étant fait au lancement de l'application, plus aucune latence ne se ferait ressentir, vu que les accès en BDD n'existeraient plus, pour laisser la place à l'accès à des objets, beaucoup plus rapide.
+Ainsi, le chargement de toute la BDD étant fait au lancement de l'application, plus aucune latence ne se ferait ressentir, vu que les accès en BDD n'existeraient plus, pour laisser la place à l'accès à des objets beaucoup plus rapide.
 De plus, notre architecture récupérant les informations de la BDD, en ayant une table correspondant à un type d'objet, facilite la transition vers un tel pattern.
 
 \begin{figure}[!ht]

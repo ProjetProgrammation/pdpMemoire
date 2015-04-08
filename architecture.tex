@@ -162,18 +162,18 @@ Nous avons décidé de complètement séparer l'administration de l'application 
 
 Cette application tierce sera lancée en ligne de commande en exécutant le fichier \textit{.jar} suivi des paramètres adéquats d'administration. La syntaxe de ces paramètres sera précisée dans la \textit{Javadoc} de l'application.\\
 
-Cette application tierce est composée de deux packages ayant un rôle bien défini que nous allons expliquer ci-contre.
+Cette application tierce est composée de deux packages ayant des rôles bien définis que nous allons expliquer ci-contre.
 
 \subsection{Admin}
 
 Ce package est le socle de base de l'application administration.\\
 La classe \textit{ProjectProgAdmin} contient tous les appels aux méthodes d'administration de la base de données. C'est à partir de cette méthode que notre client renseignera dans la ligne de commande ses désirs pour manipuler la base de données.\\
-La classe \textit{AdminDatabase} contient les méthodes statiques d'administration de la base de données. Elles permettent l'ajout et la suppression des médias et des questions issus d'un fichier texte. Mais l'affichage dans le terminal du contenu de la base de données. C'est avec cette classe que le travail d'administration de notre client est simple et rapide.
+La classe \textit{AdminDatabase} contient les méthodes statiques d'administration de la base de données. Elles permettent l'ajout et la suppression des médias et des questions issus d'un fichier texte. De plus, une méthode permet l'affichage dans le terminal du contenu de la base de données.
 
 \subsection{Thumbnails}
 
 Ce package a pour but de générer les thumbnails de chaque vidéo. Ces aperçus sont composés d'une image et d'un gif issus des vidéos. Le package est composé de 4 classes distinctes.\\
-La classe \textit{CreationThumbnail} appelles les différentes fonctions qui créent les deux types de thumbnails. Cette classe nous permet de bien appeler dans l'ordre voulu les différents objets. En effet, deux classes sont liées à la dernière.\\
-La classe \textit{Picture} est spéciale vu que c'est elle qui crée le thumbnail image mais aussi c'est elle qui appelle la fonction qui coupe la vidéo en différent "BufferedImage". Cette classe utilise les fonctionnalités du projet \textit{Xuggler}.\\
-La classe \textit{SliceFrame} découpe la vidéo passée en paramètre dans le constructeur de la classe précédente et crée une liste de "BufferedImage". Ces "images"sont sélectionnées selon la durée renseignée.\\
+La classe \textit{CreationThumbnail} appelle les différentes fonctions qui créent les deux types de thumbnails. Cette classe nous permet de bien appeler les différents objets dans l'ordre voulu.\\
+La classe \textit{Picture} est spéciale vu que c'est elle qui crée le thumbnail image mais aussi elle qui appelle la fonction qui coupe la vidéo en différent "BufferedImage". Cette classe utilise les fonctionnalités du projet \textit{Xuggler}.\\
+La classe \textit{SliceFrame} découpe la vidéo passée en paramètre dans le constructeur de la classe précédente et crée une liste de "BufferedImage". Ces "images" sont sélectionnées selon la durée renseignée.\\
 La classe \textit{Gif} n'a pas été créée par nos soins. En effet, l'auteur Elliot Kroo a créé une classe qui facilite la création d'un gif. Nous avons décidé de prendre sa classe puisqu'elle nous permettait de nous concentrer sur un autre front. De plus, le résultat que nous avons obtenu avec ce système a été satisfaisant.
